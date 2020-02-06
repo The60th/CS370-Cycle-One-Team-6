@@ -1,8 +1,10 @@
 #Demo debug file showing info how the cpu is viewing it. 
 #The commands in the program start after: Line>1: command
+#Log file created: 15:08:59
 Line>0: print hello
 Line>1: print hello
 Line>2: print tbye
-Line>3: print bye
-Line>4: jmp 1
-Line>5: print test
+Line>3: jmp 6
+Line>4: print bye
+Line>5: jmp 1
+Line>6: print test

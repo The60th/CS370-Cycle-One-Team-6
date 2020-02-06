@@ -5,6 +5,7 @@ print hello
 print hello
 
 print tbye
+jmp 6
 print bye
 
 jmp 1

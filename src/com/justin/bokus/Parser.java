@@ -4,8 +4,10 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Parser {
-    public final String fileName = "C:\\Users\\Justi\\IdeaProjects\\CS370\\basic_vm\\src\\com\\justin\\bokus\\demo.txt";
-
+    //Desktop
+    //public final String fileName = "C:\\Users\\Justi\\IdeaProjects\\CS370\\basic_vm\\src\\com\\justin\\bokus\\demo.txt";
+    //Laptop
+    public final String fileName = "C:\\Users\\Justi\\IdeaProjects\\basic_vm\\src\\com\\justin\\bokus\\demo.txt";
     public final static  char LABEL_SYMBOL = '!';
     public final static char COMMENT_SYMBOL = '#';
 
@@ -33,6 +35,11 @@ public class Parser {
         Main.getCPU().run(memory);
 
         return memory;
+    }
+
+    public String parseLabels(String line, int index){
+
+        return "null";
     }
 
     private String parseToMemory(String string){

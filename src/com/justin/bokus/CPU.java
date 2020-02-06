@@ -5,15 +5,16 @@ import java.util.ArrayList;
 
 public class CPU {
     public final static int MAX_CYCLES = 100;
+    public final static int NO_INSTRUCTION = -1;
     public void run(ArrayList<Instruction> instructions) {
         int cycle_count = 0;
-        for (int i = 0; i < instructions.size(); cycle_count++) {
-
-            int x = subRun(instructions.get(i));
-            if (x != -1) {
-                i = x;
+        for (int currentInstruction = 0; currentInstruction < instructions.size(); cycle_count++) {
+            if(currentInstruction>instructions.size()) return;
+            int targetInstruction = subRun(instructions.get(currentInstruction));
+            if (targetInstruction != NO_INSTRUCTION) {
+                currentInstruction = targetInstruction;
             }else{
-                i++;
+                currentInstruction++;
             }
 
 

@@ -11,7 +11,6 @@ public class Main {
 
         try {
 //            paraser.parseFile();
-             paraser.loadToMemory();
              Debugger.writeDebugFile(paraser.loadToMemory());
         } catch (IOException e) {
             e.printStackTrace();

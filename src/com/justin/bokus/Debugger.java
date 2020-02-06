@@ -3,7 +3,9 @@ package com.justin.bokus;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Debugger {
     public Debugger(){}
@@ -30,9 +32,12 @@ public class Debugger {
         }
 
         try {
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            String s = sdf.format(new Date());
             FileWriter myWriter = new FileWriter("debug.txt");
             myWriter.write("#Demo debug file showing info how the cpu is viewing it. " + "\n");
             myWriter.write("#The commands in the program start after: Line>1: command" + "\n");
+            myWriter.write("#Log file created: " + s + "\n");
             for(int i =0; i < memory.size(); i++){
 
               myWriter.write("Line>" +i + ": " + memory.get(i).toString());
