@@ -1,0 +1,8 @@
+#Demo debug file showing info how the cpu is viewing it. 
+#The commands in the program start after: Line>1: command
+Line>0: print hello
+Line>1: print hello
+Line>2: print tbye
+Line>3: print bye
+Line>4: jmp 1
+Line>5: print test

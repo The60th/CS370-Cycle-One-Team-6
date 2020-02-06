@@ -4,20 +4,31 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CPU {
-
-    public void run(ArrayList<Instruction> instructions){
-
-        for (int i = 0; i < instructions.size(); i++) {
+    public final static int MAX_CYCLES = 100;
+    public void run(ArrayList<Instruction> instructions) {
+        int cycle_count = 0;
+        for (int i = 0; i < instructions.size(); cycle_count++) {
 
             int x = subRun(instructions.get(i));
-            if(x != -1) i = x;
+            if (x != -1) {
+                i = x;
+            }else{
+                i++;
+            }
 
+
+            if(cycle_count > MAX_CYCLES){
+                System.out.println("System running too long: System Hung?");
+                break;
+            }
         }
     }
-    private int subRun(Instruction instruction){
+
+    private int subRun(Instruction instruction) {
         return runCommand(instruction);
     }
-    public void run(Instruction instruction){
+
+    public void run(Instruction instruction) {
         runCommand(instruction);
     }
 
