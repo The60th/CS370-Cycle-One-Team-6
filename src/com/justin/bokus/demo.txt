@@ -1,0 +1,7 @@
+print hello
+#print hello
+print tbye
+#print bye
+jmp 1
+#hello hello
+print test
