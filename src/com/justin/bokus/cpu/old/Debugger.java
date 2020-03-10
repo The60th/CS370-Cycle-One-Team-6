@@ -1,4 +1,6 @@
-package com.justin.bokus;
+package com.justin.bokus.cpu.old;
+
+import com.justin.bokus.cpu.utils.Instruction;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -1,28 +1,28 @@
-package com.justin.bokus;
+package com.justin.bokus.cpu.utils;
 
 public class Instruction {
-    cpu_commands command;
-    String param1;
-    String param2;
-    JumpLabel jumpLabel;
+    public CpuCommands command;
+    public String param1;
+    public String param2;
+    public JumpLabel jumpLabel;
 
     public Instruction(){
 
     }
-    public Instruction(cpu_commands command){
+    public Instruction(CpuCommands command){
         this.command = command;
     }
 
-    public Instruction(cpu_commands command, String param1){
+    public Instruction(CpuCommands command, String param1){
         this.command = command;
         this.param1 = param1;
     }
-    public Instruction(cpu_commands command, String param1, JumpLabel jumpLabel){
+    public Instruction(CpuCommands command, String param1, JumpLabel jumpLabel){
         this.command = command;
         this.param1 = param1;
         this.jumpLabel = jumpLabel;
     }
-    public Instruction(cpu_commands command, String param1, String param2){
+    public Instruction(CpuCommands command, String param1, String param2){
         this.command = command;
         this.param1 = param1;
         this.param2 = param2;
