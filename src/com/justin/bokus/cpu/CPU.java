@@ -2,6 +2,7 @@ package com.justin.bokus.cpu;
 
 import com.justin.bokus.cpu.old.Car;
 import com.justin.bokus.cpu.utils.Instruction;
+import com.justin.bokus.graphics.Track1;
 
 import java.util.ArrayList;
 
@@ -90,7 +91,7 @@ public class CPU {
     //This method will return the desired line we want to run.
     //-1 means do not change what line we would run next.
     private int runCommand(Instruction instruction) {
-        Car car = this.cars.get(this.current_process);
+       // Car car = this.cars.get(this.current_process);
         switch (instruction.command) {
             case no_op:
 
@@ -109,27 +110,51 @@ public class CPU {
                 System.out.println("CPU jmp> " + instruction.param1);
                 return Integer.parseInt(instruction.param1);
             case up:
-               // System.out.println("up");
-                car.setCurr_y(car.getCurr_y()- Integer.parseInt(instruction.param1));
+               //System.out.println("up");
+               Track1.Forward(parseParam(instruction.param1));
 
                 break;
             case down:
                 //System.out.println("down");
-                car.setCurr_y(car.getCurr_y()+Integer.parseInt(instruction.param1));
+                Track1.Reverse(parseParam(instruction.param1));
 
                 break;
             case left:
-                //System.out.println("left");
-                car.setCurr_x(car.getCurr_x()-Integer.parseInt(instruction.param1));
+                System.out.println(instruction.param1);
+                Track1.Left(parseParam(instruction.param1));
 
                 break;
             case right:
-               // System.out.println("right");
-                car.setCurr_x(car.getCurr_x()+Integer.parseInt(instruction.param1));
+                Track1.Right(parseParam(instruction.param1));
+               //System.out.println("right");
+               // car.setCurr_x(car.getCurr_x()+Integer.parseInt(instruction.param1));
 
                 break;
+            case oneU:
+                //System.out.println("up1");
+                Track1.Forward1(parseParam(instruction.param1));
 
+                break;
+            case oneD:
+                //System.out.println("down1");
+                Track1.Reverse1(parseParam(instruction.param1));
+
+                break;
+            case oneL:
+                //System.out.println("left1");
+                Track1.Left1(parseParam(instruction.param1));
+
+                break;
+            case oneR:
+                Track1.Right1(parseParam(instruction.param1));
+                //System.out.println("right1");
+
+                break;
         }
         return -1;
+    }
+
+    private boolean parseParam(String string){
+        return string.equalsIgnoreCase("true");
     }
 }

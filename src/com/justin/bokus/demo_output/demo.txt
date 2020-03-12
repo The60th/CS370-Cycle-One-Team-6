@@ -1,14 +1,7 @@
 #Basic script file for CS370 compiler.
 #Empty lines are supported. Whitespace within command lines is currently not fully supported.
 #Comments starting with # are supported.
-print hello
-print hello
-
-print tbye
-jmp 6
-print bye
-
-jmp 1
-#hello hello
-
-print test
+oneU true
+print t
+oneU false
+jmp 3

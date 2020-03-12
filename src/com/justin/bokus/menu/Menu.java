@@ -1,6 +1,7 @@
 package com.justin.bokus.menu;
 
 import com.justin.bokus.graphics.Thrust;
+import com.justin.bokus.graphics.Track1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class Menu extends JFrame{
+public class Menu extends JFrame {
     private int x = 300;
     private int y = 200;
     private int test = 100;
@@ -22,6 +23,7 @@ public class Menu extends JFrame{
     JButton nextButton;
     ImageIcon icon = new ImageIcon(String.valueOf(listOfFiles[mapNum]));
     JFrame jf;
+
     private void BuildWindow() {
         jf = new JFrame();
         jf.setTitle("YO");
@@ -57,21 +59,32 @@ public class Menu extends JFrame{
         jf.setVisible(true);
     }
 
-    public class MapButtonListener implements ActionListener{
+    public class MapButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             mapButton.setVisible(false);
             prevButton.setVisible(false);
             nextButton.setVisible(false);
             jf.setVisible(false);
             jf.dispose();
-            Thrust.main(new String[]{});
+            switch (mapNum) {
+                case 0:
+                    Track1.main(new String[]{});
+                    break;
+                case 1:
+                    Thrust.main(new String[]{});
+                    break;
+                case 2:
+                    break;
+                default:
+                    break;
+
+            }
         }
     }
 
-    public class PreviousButtonListener implements ActionListener{
+    public class PreviousButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(mapNum > 0)
-            {
+            if (mapNum > 0) {
                 mapNum--;
 
                 icon = new ImageIcon(String.valueOf(listOfFiles[mapNum]));
@@ -84,10 +97,9 @@ public class Menu extends JFrame{
         }
     }
 
-    public class NextButtonListener implements ActionListener{
+    public class NextButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(mapNum < listOfFiles.length - 1)
-            {
+            if (mapNum < listOfFiles.length - 1) {
                 mapNum++;
 
                 icon = new ImageIcon(String.valueOf(listOfFiles[mapNum]));
@@ -99,8 +111,8 @@ public class Menu extends JFrame{
             }
         }
     }
-    public static void main(String[] args)
-    {
+
+    public static void main(String[] args) {
         Menu window = new Menu();
         window.BuildWindow();
     }

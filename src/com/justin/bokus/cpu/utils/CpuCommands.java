@@ -9,5 +9,9 @@ public enum CpuCommands {
     right,
     left,
     up,
-    down
+    down,
+    oneR,
+    oneL,
+    oneU,
+    oneD
 }

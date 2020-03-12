@@ -9,7 +9,8 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Parser {
-    public final String fileName = "C:\\Users\\Justi\\Desktop\\Test_V2_3\\Test_V2\\src\\demo.txt";
+    public final String fileName = "C:\\Users\\Kiam Kaiser\\Documents\\Computer Science\\CS370\\basic_vm\\src\\com\\justin\\bokus\\" +
+            "demo_output\\demo.txt";
     public final String fileName2 = "C:\\Users\\Justi\\Desktop\\Test_V2_3\\Test_V2\\src\\demo2.txt";
 
     public final static  char LABEL_SYMBOL = '!';
@@ -121,9 +122,6 @@ public class Parser {
         return instructionBuilder(cpu_command, line, index, false,jumps);
     }
 
-    private String[] getCommands(){
-        return new String[]{"no_op","print","add","sub","jmp"};
-    }
 
     public Instruction instructionBuilder(CpuCommands command, String line, int index, boolean isJump, ArrayList<JumpLabel> jumps){
         //System.out.println("Line: " + line);
