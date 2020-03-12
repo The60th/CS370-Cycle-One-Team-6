@@ -26,7 +26,7 @@ public class Menu extends JFrame {
 
     private void BuildWindow() {
         jf = new JFrame();
-        jf.setTitle("YO");
+        jf.setTitle("Sloppy Drivers: You Can't Drive!");
         jf.setSize(1200, 800);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jf.setResizable(false);

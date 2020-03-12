@@ -92,6 +92,7 @@ public abstract class SimulationFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		// add a window listener
 		JFrame frame = this;
+		frame.setTitle("Sloppy Drivers: You Can't Drive!");
 		this.addWindowListener(new WindowAdapter() {
 			/* (non-Javadoc)
 			 * @see java.awt.event.WindowAdapter#windowClosing(java.awt.event.WindowEvent)

@@ -12,6 +12,9 @@ import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -62,6 +65,50 @@ public class Track1 extends SimulationFrame {
 
     public Track1(){
         super("Track1", 1);
+
+        KeyListener listener = new Track1.CustomKeyListener();
+
+        this.addKeyListener(listener);
+        this.canvas.addKeyListener(listener);
+    }
+
+    private class CustomKeyListener extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_UP:
+                    isForward1.set(true);
+                    break;
+                case KeyEvent.VK_DOWN:
+                    isReverse1.set(true);
+                    break;
+                case KeyEvent.VK_LEFT:
+                    isLeft1.set(true);
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    isRight1.set(true);
+                    break;
+            }
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_UP:
+                    isForward1.set(false);
+                    break;
+                case KeyEvent.VK_DOWN:
+                    isReverse1.set(false);
+                    break;
+                case KeyEvent.VK_LEFT:
+                    isLeft1.set(false);
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    isRight1.set(false);
+                    break;
+            }
+        }
     }
 
     @Override
@@ -149,9 +196,25 @@ public class Track1 extends SimulationFrame {
         this.world.addBody(corner4);
 
         SimulationBody edgeL = new SimulationBody(Color.green);
-        edgeL.addFixture(Geometry.createRectangle(5, 250));
+        edgeL.addFixture(Geometry.createRectangle(10, 250));
         edgeL.translate(-599, 0);
         world.addBody(edgeL);
+
+        SimulationBody edgeR = new SimulationBody(Color.green);
+        edgeR.addFixture(Geometry.createRectangle(10, 250));
+        edgeR.translate(599, 0);
+        world.addBody(edgeR);
+
+
+        SimulationBody edgeTop = new SimulationBody(Color.green);
+        edgeTop.addFixture(Geometry.createRectangle(1000, 10));
+        edgeTop.translate(0, 400);
+        world.addBody(edgeTop);
+
+        SimulationBody edgeLower = new SimulationBody(Color.green);
+        edgeLower.addFixture(Geometry.createRectangle(1000, 10));
+        edgeLower.translate(0, -400);
+        world.addBody(edgeLower);
 
         car = new SimulationBody(Color.red);
         car.addFixture(Geometry.createRectangle(25, 50));

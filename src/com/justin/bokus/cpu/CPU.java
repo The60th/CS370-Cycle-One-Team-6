@@ -16,7 +16,11 @@ public class CPU {
     private int current_process;
     private int total_processes;
     private boolean memory_loaded = false;
-
+    private int currNoOp = 0;
+    private int targetNoOp = 0;
+    private int noOpReturnCode = -2;
+    private boolean noOpInProgress = false;
+    private boolean fileEnd = false;
     public final static int MAX_CYCLES = 1000;
     public final static int CYCLES_PER_PROCESS = 10;
 
@@ -41,6 +45,9 @@ public class CPU {
             System.out.println("CPU Fatal Error:> Can't runAsyncCycles without loaded memory.");
             System.exit(-1);
         }
+        if(this.fileEnd){
+            return;
+        }
         //Swap the current process
         if(this.current_process_cycles > CYCLES_PER_PROCESS){
             this.current_process +=1;
@@ -51,8 +58,10 @@ public class CPU {
         int current_instruction = process_index[this.current_process];
 
         int x = subRun(this.memory.get(this.current_process).get(current_instruction));
-
-        if (x != -1) {
+        if(x == noOpReturnCode){
+            //Don't increment the process running a null op
+        }
+        else if (x != -1) {
             process_index[this.current_process] = x;
         }else{
             process_index[this.current_process]++;
@@ -66,7 +75,7 @@ public class CPU {
         for (int i = 0; i < instructions.size(); cycle_count++) {
 
             int x = subRun(instructions.get(i));
-            if (x != -1) {
+            if (x != -1 || x == noOpReturnCode) {
                 i = x;
             }else{
                 i++;
@@ -94,7 +103,18 @@ public class CPU {
        // Car car = this.cars.get(this.current_process);
         switch (instruction.command) {
             case no_op:
-
+              // System.out.println("No_op");
+                if(!this.noOpInProgress){
+                    this.currNoOp = 1;
+                    this.targetNoOp = Integer.parseInt(instruction.param1);
+                    this.noOpInProgress = true;
+                }
+                if(this.currNoOp < this.targetNoOp){
+                    this.currNoOp++;
+                    return noOpReturnCode;
+                }else{
+                    this.noOpInProgress = false;
+                }
                 break;
             case add:
 
@@ -107,15 +127,15 @@ public class CPU {
                 //car.setXY(car.getCurr_x() + 10, car.getCurr_y()+10);
                 break;
             case jmp:
-                System.out.println("CPU jmp> " + instruction.param1);
+                //System.out.println("CPU jmp> " + instruction.param1);
                 return Integer.parseInt(instruction.param1);
             case up:
-               //System.out.println("up");
+               System.out.println("up");
                Track1.Forward(parseParam(instruction.param1));
 
                 break;
             case down:
-                //System.out.println("down");
+                System.out.println("down");
                 Track1.Reverse(parseParam(instruction.param1));
 
                 break;
@@ -126,7 +146,7 @@ public class CPU {
                 break;
             case right:
                 Track1.Right(parseParam(instruction.param1));
-               //System.out.println("right");
+               System.out.println("right");
                // car.setCurr_x(car.getCurr_x()+Integer.parseInt(instruction.param1));
 
                 break;

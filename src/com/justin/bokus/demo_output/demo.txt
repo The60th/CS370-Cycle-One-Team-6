@@ -1,7 +1,40 @@
 #Basic script file for CS370 compiler.
 #Empty lines are supported. Whitespace within command lines is currently not fully supported.
 #Comments starting with # are supported.
-oneU true
-print t
-oneU false
-jmp 3
+print Racing!
+up true
+no_op 450
+right true
+no_op 30
+right false
+left true
+no_op 40
+up false
+left false
+up true
+no_op 450
+right true
+no_op 25
+right false
+left true
+no_op 25
+left false
+up true
+no_op 1000
+up false
+right true
+no_op 25
+right false
+left true
+no_op 25
+left false
+up true
+no_op 1000
+right true
+no_op 10
+right false
+left true
+no_op 10
+left false
+up true
+jmp 36
