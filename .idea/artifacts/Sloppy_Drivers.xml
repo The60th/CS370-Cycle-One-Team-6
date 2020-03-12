@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Sloppy Drivers">
+    <output-path>$PROJECT_DIR$/out/artifacts/Sloppy_Drivers</output-path>
+    <root id="archive" name="Sloppy Drivers.jar">
+      <element id="module-output" name="basic_vm" />
+      <element id="library" level="project" name="Maven: org.dyn4j:dyn4j:3.4.0" />
+      <element id="library" level="project" name="Maven: org.jogamp.jogl:jogl-all:2.3.2" />
+      <element id="library" level="project" name="Maven: org.jogamp.gluegen:gluegen-rt:2.3.2" />
+      <element id="file-copy" path="$PROJECT_DIR$/com/justin/META-INF/MANIFEST.MF" />
+      <element id="dir-copy" path="$PROJECT_DIR$/com/justin/bokus/res" />
+    </root>
+  </artifact>
+</component>
