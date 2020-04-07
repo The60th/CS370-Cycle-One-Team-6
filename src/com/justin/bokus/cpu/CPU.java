@@ -2,7 +2,7 @@ package com.justin.bokus.cpu;
 
 import com.justin.bokus.cpu.old.Car;
 import com.justin.bokus.cpu.utils.Instruction;
-import com.justin.bokus.graphics.Track1;
+import com.justin.bokus.graphics.GameWorld;
 
 import java.util.ArrayList;
 
@@ -107,46 +107,46 @@ public class CPU {
                 //car.setXY(car.getCurr_x() + 10, car.getCurr_y()+10);
                 break;
             case jmp:
-                System.out.println("CPU jmp> " + instruction.param1);
+                //System.out.println("CPU jmp> " + instruction.param1);
                 return Integer.parseInt(instruction.param1);
             case up:
                //System.out.println("up");
-               Track1.Forward(parseParam(instruction.param1));
+               GameWorld.Forward(parseParam(instruction.param1));
 
                 break;
             case down:
                 //System.out.println("down");
-                Track1.Reverse(parseParam(instruction.param1));
+                GameWorld.Reverse(parseParam(instruction.param1));
 
                 break;
             case left:
                 System.out.println(instruction.param1);
-                Track1.Left(parseParam(instruction.param1));
+                GameWorld.Left(parseParam(instruction.param1));
 
                 break;
             case right:
-                Track1.Right(parseParam(instruction.param1));
+                GameWorld.Right(parseParam(instruction.param1));
                //System.out.println("right");
                // car.setCurr_x(car.getCurr_x()+Integer.parseInt(instruction.param1));
 
                 break;
             case oneU:
                 //System.out.println("up1");
-                Track1.Forward1(parseParam(instruction.param1));
+                GameWorld.Forward1(parseParam(instruction.param1));
 
                 break;
             case oneD:
                 //System.out.println("down1");
-                Track1.Reverse1(parseParam(instruction.param1));
+                GameWorld.Reverse1(parseParam(instruction.param1));
 
                 break;
             case oneL:
                 //System.out.println("left1");
-                Track1.Left1(parseParam(instruction.param1));
+                GameWorld.Left1(parseParam(instruction.param1));
 
                 break;
             case oneR:
-                Track1.Right1(parseParam(instruction.param1));
+                GameWorld.Right1(parseParam(instruction.param1));
                 //System.out.println("right1");
 
                 break;

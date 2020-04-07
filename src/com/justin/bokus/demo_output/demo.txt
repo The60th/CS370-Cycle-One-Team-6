@@ -1,7 +1,17 @@
-#Basic script file for CS370 compiler.
-#Empty lines are supported. Whitespace within command lines is currently not fully supported.
-#Comments starting with # are supported.
 oneU true
-print t
+up true
+no_op 100
+up false
+no_op 50
 oneU false
-jmp 3
+oneR true
+right true
+no_op 1
+oneR false
+right false
+oneU true
+up true
+no_op 100
+up false
+oneU false
+jmp 17

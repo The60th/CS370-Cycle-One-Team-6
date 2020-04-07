@@ -1,7 +1,7 @@
 package com.justin.bokus.menu;
 
+import com.justin.bokus.graphics.GameWorld;
 import com.justin.bokus.graphics.Thrust;
-import com.justin.bokus.graphics.Track1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -68,7 +68,7 @@ public class Menu extends JFrame {
             jf.dispose();
             switch (mapNum) {
                 case 0:
-                    Track1.main(new String[]{});
+                    GameWorld.main(new String[]{});
                     break;
                 case 1:
                     Thrust.main(new String[]{});
