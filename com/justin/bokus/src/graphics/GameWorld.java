@@ -15,6 +15,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
+import org.dyn4j.dynamics.Settings;
 
 
 @SuppressWarnings("ALL")

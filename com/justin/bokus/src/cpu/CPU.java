@@ -133,23 +133,23 @@ public class CPU {
                 //System.out.println("CPU jmp> " + instruction.param1);
                 return Integer.parseInt(instruction.param1);
             case up:
-               System.out.println("up");
+               //System.out.println("up");
                GameWorld.Forward(parseParam(instruction.param1));
 
                 break;
             case down:
-                System.out.println("down");
+                //System.out.println("down");
                 GameWorld.Reverse(parseParam(instruction.param1));
 
                 break;
             case left:
-                System.out.println(instruction.param1);
+                //System.out.println(instruction.param1);
                 GameWorld.Left(parseParam(instruction.param1));
 
                 break;
             case right:
                 GameWorld.Right(parseParam(instruction.param1));
-               System.out.println("right");
+               //System.out.println("right");
                // car.setCurr_x(car.getCurr_x()+Integer.parseInt(instruction.param1));
 
                 break;
