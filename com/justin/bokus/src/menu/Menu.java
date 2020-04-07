@@ -1,5 +1,6 @@
 package menu;
 
+import graphics.GameWorld;
 import graphics.Thrust;
 import graphics.Track1;
 
@@ -68,7 +69,7 @@ public class Menu extends JFrame {
             jf.dispose();
             switch (mapNum) {
                 case 0:
-                    Track1.main(new String[]{});
+                    GameWorld.main(new String[]{});
                     break;
                 case 1:
                     Thrust.main(new String[]{});

@@ -1,4 +1,4 @@
-package com.justin.bokus.graphics;
+package graphics;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

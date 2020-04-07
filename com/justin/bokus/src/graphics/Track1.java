@@ -1,6 +1,6 @@
-package com.justin.bokus.graphics;
+package graphics;
 
-import com.justin.bokus.framework.SimulationBody;
+import framework.SimulationBody;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;

@@ -1,10 +1,12 @@
-package com.justin.bokus.graphics;
+package graphics;
 
-import com.justin.bokus.cpu.CPU;
-import com.justin.bokus.cpu.Parser;
-import com.justin.bokus.cpu.old.Car;
-import com.justin.bokus.cpu.utils.Instruction;
-import com.justin.bokus.framework.*;
+
+import cpu.CPU;
+import cpu.Parser;
+import cpu.old.Car;
+import cpu.utils.Instruction;
+import framework.SimulationBody;
+import framework.SimulationFrame;
 import org.dyn4j.collision.narrowphase.Sat;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
@@ -270,8 +272,6 @@ public class GameWorld extends SimulationFrame {
 
     public static void main(String[] args)  {
         GameWorld display = new GameWorld();
-
-
 
         display.run();
     }
