@@ -7,7 +7,9 @@ import cpu.utils.Instruction;
 import cpu.utils.JumpLabel;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Parser {
     public final String fileName = "com/justin/bokus/res/text/demo.txt";
@@ -126,13 +128,15 @@ public class Parser {
         }
         // System.out.println("Params: " +  params);
 
+        //Remove all white space from the params list
         String param = params.replaceAll("\\s+", "");
+        String[] paramArray = params.substring(1).split(" ");
         if (isJump) {
             jumps.add(new JumpLabel(index, Integer.parseInt(param)));
-            return new Instruction(command, param, new JumpLabel(index, Integer.parseInt(param)));
+            return new Instruction(command, new ArrayList<>(Arrays.asList(paramArray)), new JumpLabel(index, Integer.parseInt(param)));
         }
 
-        return new Instruction(command, param);
+        return new Instruction(command, new ArrayList<>(Arrays.asList(paramArray)));
     }
 
     public CpuCommands parseCommand(String command) {

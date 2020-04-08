@@ -13,5 +13,6 @@ public enum CpuCommands {
     oneR,
     oneL,
     oneU,
-    oneD
+    oneD,
+    read
 }
