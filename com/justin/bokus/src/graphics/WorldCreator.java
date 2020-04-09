@@ -26,7 +26,7 @@ public class WorldCreator {
 
     public static void main(String[] args){
         try {
-            WriteWorld("test");
+            WriteWorld("TestFile");
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
             File test = new File(fileName + "TestFile.java");
             compiler.run(null, null, null, test.getPath());
