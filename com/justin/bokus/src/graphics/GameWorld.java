@@ -8,15 +8,21 @@ import cpu.utils.Instruction;
 import framework.SimulationBody;
 import framework.SimulationFrame;
 import org.dyn4j.collision.narrowphase.Sat;
+import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
+
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
-import org.dyn4j.dynamics.Settings;
-
 
 @SuppressWarnings("ALL")
 public class GameWorld extends SimulationFrame {
@@ -65,6 +71,23 @@ public class GameWorld extends SimulationFrame {
     public GameWorld(){
         super("GameWorld", 1);
     }
+    public void LoadWorld(String fileName, World world, SimulationBody car, SimulationBody car1){
+        try {
+            Class[] param = new Class[3];
+            param[0] = World.class;
+            param[1] = SimulationBody.class;
+            param[2] = SimulationBody.class;
+            //JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+            File test = new File(System.getProperty("user.dir") + "/com/justin/bokus/src/graphics/" + fileName + ".java"); //this is working dir + package info
+            //compiler.run(null, null, null, test.getPath());
+            File tc = new File(System.getProperty("user.dir") + "/com/justin/bokus/src/");
+            ClassLoader loader = new URLClassLoader(new URL[]{tc.toURI().toURL()});
+            Class<?> f = loader.loadClass("graphics." + fileName);
+            Method t = f.getMethod("buildWorld", param);
+            t.invoke(t, world, car, car1);
+        }
+        catch(Exception e){ System.out.println(e); }
+    }
 
     @Override
     protected void initializeWorld(){
@@ -83,7 +106,8 @@ public class GameWorld extends SimulationFrame {
         //translate located in world file that tells where the starting position of the car is
         this.world.addBody(car1);
 
-        Track1.buildWorld(this.world, car, car1);
+
+        LoadWorld("Track1", this.world, car, car1);
     }
 
     @SuppressWarnings("Duplicates")

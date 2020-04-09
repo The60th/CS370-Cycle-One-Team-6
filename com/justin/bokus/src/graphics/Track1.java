@@ -125,5 +125,4 @@ public class Track1 {
         car1.translate(-525, -25);
 
     }
-
 }
