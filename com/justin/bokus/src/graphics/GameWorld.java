@@ -6,6 +6,7 @@ import cpu.old.Car;
 import cpu.utils.Instruction;
 import framework.SimulationBody;
 import framework.SimulationFrame;
+import graphics.tracks.Track2;
 import org.dyn4j.collision.narrowphase.Sat;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Geometry;
@@ -123,7 +124,8 @@ public class GameWorld extends SimulationFrame {
         //translate located in world file that tells where the starting position of the car is
         this.world.addBody(car1);
 
-        LoadWorld(fileName, this.world, car, car1); //building the track found in Track1.java
+        //LoadWorld(fileName, this.world, car, car1); //building the track found in Track1.java
+        Track2.buildWorld(this.world, car, car1);
     }
 
     @Override

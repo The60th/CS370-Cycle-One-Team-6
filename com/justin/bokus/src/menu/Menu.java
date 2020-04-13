@@ -26,7 +26,6 @@ public class Menu extends JFrame {
     JFrame jf;
 
     private void BuildWindow() {
-
         for(int i = 0; i < listOfFiles.length; i++){
             listOfNames[i] = listOfFiles[i].getName().substring(0, listOfFiles[i].getName().indexOf('.'));
         }
@@ -71,18 +70,8 @@ public class Menu extends JFrame {
             nextButton.setVisible(false);
             jf.setVisible(false);
             jf.dispose();
-            switch (mapNum) {
-                case 0:
-                    Thrust.main(new String[]{});
-                    break;
-                case 2:
-                    GameWorld.setFileName(listOfNames[2]);
-                    GameWorld.main(new String[]{});
-                    break;
-                default:
-                    break;
-
-            }
+            GameWorld.setFileName(listOfNames[mapNum]);
+            GameWorld.main(new String[]{});
         }
     }
 
