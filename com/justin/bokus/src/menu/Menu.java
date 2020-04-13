@@ -25,13 +25,18 @@ public class Menu extends JFrame {
     JFrame jf;
 
     private void BuildWindow() {
+        String[] listOfNames = new String[listOfFiles.length];
+        for(int i = 0; i < listOfFiles.length; i++){
+            listOfNames[i] = listOfFiles[i].getName().substring(0, listOfFiles[i].getName().indexOf('.'));
+            System.out.println(listOfNames[i]);
+        }
+
         jf = new JFrame();
         jf.setTitle("Sloppy Drivers: You Can't Drive!");
         jf.setSize(1200, 800);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jf.setResizable(false);
         jf.setLayout(null);
-
 
         Image image = icon.getImage();
         Image scaledImage = image.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
