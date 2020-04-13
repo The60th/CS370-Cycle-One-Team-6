@@ -2,11 +2,6 @@
 #Empty lines are supported. Whitespace within command lines is currently not fully supported.
 #Comments starting with # are supported.
 print Racing!
-add 0 0
-add 1 100
-add 2 200
-sub 3 100
-add 4 250
-add 4 250
-add 4 250
-sub 4 250
+up true
+oneU true
+jmp 3

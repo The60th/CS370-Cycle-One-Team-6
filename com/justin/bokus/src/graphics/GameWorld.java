@@ -83,13 +83,13 @@ public class GameWorld extends SimulationFrame {
             //Below copiles the track to make sure it is up to date then builds the track
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
             StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
-            File javaFile = new File(System.getProperty("user.dir") + "/com/justin/bokus/src/graphics/" + fileName + ".java"); //finding the file to be compiled
+            File javaFile = new File(System.getProperty("user.dir") + "/com/justin/bokus/src/graphics/tracks/" + fileName + ".java"); //finding the file to be compiled
             Iterable<? extends JavaFileObject> compileLocation = fileManager.getJavaFileObjects(javaFile);  //loads the file to be compiled
-            Iterable<String> options = new ArrayList<String>(Arrays.asList("-d", System.getProperty("user.dir") + "/target/classes/")); //desired location of the new .class file
+            Iterable<String> options = new ArrayList<String>(Arrays.asList("-d", System.getProperty("user.dir") + "/target/classes/")); //location of the desired .class package
             compiler.getTask(null, fileManager, null, options, null, compileLocation).call();   //compiling the file
             File compiledFile = new File(System.getProperty("user.dir") + "/target/classes/");  //loading the compiled track file
             ClassLoader loader = new URLClassLoader(new URL[]{compiledFile.toURI().toURL()});   //finding the track class
-            Class<?> f = loader.loadClass("graphics." + fileName);  //loading the track class
+            Class<?> f = loader.loadClass("graphics.tracks." + fileName);  //loading the track class
             Method t = f.getMethod("buildWorld", param);    //loading the method that builds the track
             t.invoke(t, world, car, car1);  //running the method and actually building the track
             fileManager.close();

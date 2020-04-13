@@ -2,7 +2,6 @@ package menu;
 
 import graphics.GameWorld;
 import graphics.Thrust;
-import graphics.Track1;
 
 import javax.swing.*;
 import java.awt.*;

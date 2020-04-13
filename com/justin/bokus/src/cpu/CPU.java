@@ -5,11 +5,8 @@ import cpu.old.Car;
 import cpu.utils.CPUException;
 import cpu.utils.Instruction;
 import graphics.GameWorld;
-import graphics.Track1;
 
 import java.util.ArrayList;
-
-import static cpu.utils.CpuCommands.*;
 
 
 public class CPU {

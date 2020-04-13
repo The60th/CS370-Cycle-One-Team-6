@@ -1,4 +1,4 @@
-package graphics;
+package graphics.tracks;
 
 import framework.SimulationBody;
 import org.dyn4j.dynamics.World;
