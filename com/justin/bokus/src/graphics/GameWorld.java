@@ -1,6 +1,5 @@
 package graphics;
 
-
 import cpu.CPU;
 import cpu.Parser;
 import cpu.old.Car;
@@ -12,8 +11,9 @@ import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
-
 import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 import java.awt.*;
 import java.io.File;
@@ -22,17 +22,18 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("Duplicates")
 public class GameWorld extends SimulationFrame {
 
     public CPU cpu;
-    boolean firstRun = true;
+    private boolean firstRun = true;
 
 
-    public SimulationBody car;
-    public SimulationBody car1;
+    private SimulationBody car;
+    private SimulationBody car1;
     private static AtomicBoolean isLeft = new AtomicBoolean(false);
     private static AtomicBoolean isRight = new AtomicBoolean(false);
     private static AtomicBoolean isForward = new AtomicBoolean(false);
@@ -68,31 +69,46 @@ public class GameWorld extends SimulationFrame {
         isReverse1.set(applyThrust);
     }
 
-    public GameWorld(){
+    private GameWorld(){
         super("GameWorld", 1);
     }
-    public void LoadWorld(String fileName, World world, SimulationBody car, SimulationBody car1){
+
+    private void LoadWorld(String fileName, World world, SimulationBody car, SimulationBody car1){
         try {
             Class[] param = new Class[3];
             param[0] = World.class;
             param[1] = SimulationBody.class;
             param[2] = SimulationBody.class;
-            //JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-            File test = new File(System.getProperty("user.dir") + "/com/justin/bokus/src/graphics/" + fileName + ".java"); //this is working dir + package info
-            //compiler.run(null, null, null, test.getPath());
-            File tc = new File(System.getProperty("user.dir") + "/com/justin/bokus/src/");
-            ClassLoader loader = new URLClassLoader(new URL[]{tc.toURI().toURL()});
-            Class<?> f = loader.loadClass("graphics." + fileName);
-            Method t = f.getMethod("buildWorld", param);
-            t.invoke(t, world, car, car1);
+
+            //Below copiles the track to make sure it is up to date then builds the track
+            JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+            StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
+            File javaFile = new File(System.getProperty("user.dir") + "/com/justin/bokus/src/graphics/" + fileName + ".java"); //finding the file to be compiled
+            Iterable<? extends JavaFileObject> compileLocation = fileManager.getJavaFileObjects(javaFile);  //loads the file to be compiled
+            Iterable<String> options = new ArrayList<String>(Arrays.asList("-d", System.getProperty("user.dir") + "/target/classes/")); //desired location of the new .class file
+            compiler.getTask(null, fileManager, null, options, null, compileLocation).call();   //compiling the file
+            File compiledFile = new File(System.getProperty("user.dir") + "/target/classes/");  //loading the compiled track file
+            ClassLoader loader = new URLClassLoader(new URL[]{compiledFile.toURI().toURL()});   //finding the track class
+            Class<?> f = loader.loadClass("graphics." + fileName);  //loading the track class
+            Method t = f.getMethod("buildWorld", param);    //loading the method that builds the track
+            t.invoke(t, world, car, car1);  //running the method and actually building the track
+            fileManager.close();
         }
-        catch(Exception e){ System.out.println(e); }
+        catch(java.lang.ClassNotFoundException e){
+            System.out.println(e);
+            System.out.println("The fileName was likely entered incorrectly");
+        }
+        catch(java.lang.NoSuchMethodException e){
+            System.out.println(e);
+            System.out.println("The chosen class does not have the required method named \"buildWorld\"");
+        }
+        catch(Exception e){System.out.println(e);}
     }
 
     @Override
     protected void initializeWorld(){
         this.world.setGravity(world.ZERO_GRAVITY);    //set the gravity to zero because it is top town
-        this.world.setNarrowphaseDetector(new Sat());
+        this.world.setNarrowphaseDetector(new Sat());      //enabing collision detection
 
         car = new SimulationBody(Color.red);
         car.addFixture(Geometry.createRectangle(25, 50));
@@ -106,11 +122,9 @@ public class GameWorld extends SimulationFrame {
         //translate located in world file that tells where the starting position of the car is
         this.world.addBody(car1);
 
-
-        LoadWorld("Track1", this.world, car, car1);
+        LoadWorld("Track1", this.world, car, car1); //building the track found in Track1.java
     }
 
-    @SuppressWarnings("Duplicates")
     @Override
     protected void update(Graphics2D g, double elapsedTime) {
         super.update(g, elapsedTime);
