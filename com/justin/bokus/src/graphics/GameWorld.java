@@ -98,7 +98,7 @@ public class GameWorld extends SimulationFrame {
         }
         catch(java.lang.ClassNotFoundException e){
             System.out.println(e);
-            System.out.println("The fileName was likely entered incorrectly");
+            System.out.println("Is the image of the track in res named the SAME as the java file in tracks?");
         }
         catch(java.lang.NoSuchMethodException e){
             System.out.println(e);

@@ -12,7 +12,7 @@ public class Track2 {
         SimulationBody infield = new SimulationBody(Color.green);
         infield.setMass(MassType.INFINITE);
         infield.addFixture(Geometry.createPolygon(
-                new Vector2(-400, 300), new Vector2(-400, -300), new Vector2(400, 0)));
+                new Vector2(-400, 250), new Vector2(-400, -250), new Vector2(300, 00)));
         world.addBody(infield);
 
         SimulationBody left = new SimulationBody(Color.green);
