@@ -31,9 +31,9 @@ public class GameWorld extends SimulationFrame {
     public CPU cpu;
     private boolean firstRun = true;
 
-
     private SimulationBody car;
     private SimulationBody car1;
+    private static String fileName;
     private static AtomicBoolean isLeft = new AtomicBoolean(false);
     private static AtomicBoolean isRight = new AtomicBoolean(false);
     private static AtomicBoolean isForward = new AtomicBoolean(false);
@@ -46,7 +46,6 @@ public class GameWorld extends SimulationFrame {
     public static void Left(boolean applyThrust){
         isLeft.set(applyThrust);
     }
-
     public static void Right(boolean applyThrust){
         isRight.set(applyThrust);
     }
@@ -68,6 +67,8 @@ public class GameWorld extends SimulationFrame {
     public static void Reverse1(boolean applyThrust){
         isReverse1.set(applyThrust);
     }
+
+    public static void setFileName(String inFileName){fileName = inFileName;}
 
     private GameWorld(){
         super("GameWorld", 1);
@@ -122,7 +123,7 @@ public class GameWorld extends SimulationFrame {
         //translate located in world file that tells where the starting position of the car is
         this.world.addBody(car1);
 
-        LoadWorld("Track1", this.world, car, car1); //building the track found in Track1.java
+        LoadWorld(fileName, this.world, car, car1); //building the track found in Track1.java
     }
 
     @Override

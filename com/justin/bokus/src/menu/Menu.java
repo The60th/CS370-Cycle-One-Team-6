@@ -14,9 +14,10 @@ public class Menu extends JFrame {
     private int y = 200;
     private int test = 100;
 
-    static File folder = new File("com/justin/bokus/res/images");
-    static File[] listOfFiles = folder.listFiles();
-    static int mapNum = 0;
+    private static File folder = new File("com/justin/bokus/res/images");
+    private static File[] listOfFiles = folder.listFiles();
+    private String[] listOfNames = new String[listOfFiles.length];
+    private static int mapNum = 0;
 
     JButton mapButton;
     JButton prevButton;
@@ -25,10 +26,9 @@ public class Menu extends JFrame {
     JFrame jf;
 
     private void BuildWindow() {
-        String[] listOfNames = new String[listOfFiles.length];
+
         for(int i = 0; i < listOfFiles.length; i++){
             listOfNames[i] = listOfFiles[i].getName().substring(0, listOfFiles[i].getName().indexOf('.'));
-            System.out.println(listOfNames[i]);
         }
 
         jf = new JFrame();
@@ -73,12 +73,11 @@ public class Menu extends JFrame {
             jf.dispose();
             switch (mapNum) {
                 case 0:
-                    GameWorld.main(new String[]{});
-                    break;
-                case 1:
                     Thrust.main(new String[]{});
                     break;
                 case 2:
+                    GameWorld.setFileName(listOfNames[2]);
+                    GameWorld.main(new String[]{});
                     break;
                 default:
                     break;
