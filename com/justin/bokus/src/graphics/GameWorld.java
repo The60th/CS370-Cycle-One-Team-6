@@ -124,8 +124,7 @@ public class GameWorld extends SimulationFrame {
         //translate located in world file that tells where the starting position of the car is
         this.world.addBody(car1);
 
-        //LoadWorld(fileName, this.world, car, car1); //building the track found in Track1.java
-        Track2.buildWorld(this.world, car, car1);
+        LoadWorld(fileName, this.world, car, car1); //building the track found in Track1.java
     }
 
     @Override
