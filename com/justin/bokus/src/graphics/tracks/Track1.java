@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class Track1 {
     public static void buildWorld(World world, SimulationBody car, SimulationBody car1){
-
+        
         //use rectangles with triangles on the end to mimic a concave polygon
         SimulationBody infield = new SimulationBody(Color.green);
         infield.setMass(MassType.INFINITE);
