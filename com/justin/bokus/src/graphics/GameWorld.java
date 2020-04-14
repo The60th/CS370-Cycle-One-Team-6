@@ -6,7 +6,6 @@ import cpu.old.Car;
 import cpu.utils.Instruction;
 import framework.SimulationBody;
 import framework.SimulationFrame;
-import graphics.tracks.Track2;
 import org.dyn4j.collision.narrowphase.Sat;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Geometry;

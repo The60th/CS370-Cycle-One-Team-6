@@ -33,30 +33,6 @@ public class Track2 {
                 new Vector2(-500, -400), new Vector2(600, -400), new Vector2(600,  0), new Vector2(500, 0)));
         world.addBody(bottomRight);
 
-        SimulationBody edgeL = new SimulationBody(Color.green);
-        edgeL.setMass(MassType.INFINITE);
-        edgeL.addFixture(Geometry.createRectangle(5, 230));
-        edgeL.translate(-599, 0);
-        world.addBody(edgeL);
-
-        SimulationBody edgeU = new SimulationBody(Color.green);
-        edgeU.setMass(MassType.INFINITE);
-        edgeU.addFixture(Geometry.createRectangle(620, 5));
-        edgeU.translate(0, 400);
-        world.addBody(edgeU);
-
-        SimulationBody edgeD = new SimulationBody(Color.green);
-        edgeD.setMass(MassType.INFINITE);
-        edgeD.addFixture(Geometry.createRectangle(620, 5));
-        edgeD.translate(0, -400);
-        world.addBody(edgeD);
-
-        SimulationBody edgeR = new SimulationBody(Color.green);
-        edgeR.setMass(MassType.INFINITE);
-        edgeR.addFixture(Geometry.createRectangle(5, 230));
-        edgeR.translate(599, 0);
-        world.addBody(edgeR);
-
         car.translate(-475, -25);
 
         car1.translate(-425, -25);
