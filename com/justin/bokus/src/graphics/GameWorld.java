@@ -6,6 +6,7 @@ import cpu.old.Car;
 import cpu.utils.Instruction;
 import framework.SimulationBody;
 import framework.SimulationFrame;
+import org.dyn4j.collision.broadphase.Sap;
 import org.dyn4j.collision.narrowphase.Sat;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Geometry;
@@ -112,13 +113,12 @@ public class GameWorld extends SimulationFrame {
     @Override
     protected void initializeWorld(){
         this.world.setGravity(world.ZERO_GRAVITY);    //set the gravity to zero because it is top town
-        this.world.setNarrowphaseDetector(new Sat());      //enabing collision detection
 
         car = new SimulationBody(Color.red);
         car.addFixture(Geometry.createRectangle(25, 50));
         car.setMass(MassType.NORMAL);
         //translate located in world file that tells where the starting postion of the car is
-        world.addBody(car);
+        this.world.addBody(car);
 
         car1 = new SimulationBody(Color.blue);
         car1.addFixture(Geometry.createRectangle(25, 50));
