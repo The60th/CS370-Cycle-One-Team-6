@@ -146,8 +146,7 @@ public class GameWorld extends SimulationFrame {
             ArrayList<ArrayList<Instruction>> master_memory = new ArrayList<>();
             master_memory.add(memory);
 
-            ArrayList<Car> t = new ArrayList<>();
-            this.cpu = new CPU(master_memory,t );
+            this.cpu = new CPU(master_memory );
             this.firstRun = false;
         }
 

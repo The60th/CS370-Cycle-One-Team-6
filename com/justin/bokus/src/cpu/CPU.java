@@ -32,7 +32,7 @@ public class CPU {
 
     public CPU(){ }
 
-    public CPU(ArrayList<ArrayList<Instruction>> incoming_memory, ArrayList<Car> incoming_cars){
+    public CPU(ArrayList<ArrayList<Instruction>> incoming_memory){
         this.memory_loaded = true;
         this.memory = incoming_memory;
         this.total_processes = this.memory.size();
