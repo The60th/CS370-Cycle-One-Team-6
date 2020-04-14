@@ -26,7 +26,7 @@ public class CPULoader {
 
             ArrayList<Car> master_cars = new ArrayList<>();
             master_cars = cars;
-            loaded_cpu = new CPU(master_memory,master_cars);
+            loaded_cpu = new CPU(master_memory);
             //loaded_cpu.runAsyncCycle();
 
         } catch (IOException e) {

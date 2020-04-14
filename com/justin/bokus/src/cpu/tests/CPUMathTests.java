@@ -27,8 +27,7 @@ public class CPUMathTests {
         ArrayList<ArrayList<Instruction>> master_memory = new ArrayList<>();
         master_memory.add(memory);
 
-        ArrayList<Car> t = new ArrayList<>();
-        cpu = new CPU(master_memory,t );
+        cpu = new CPU(master_memory );
 
         int registerZeroValue = 0;
         int registerOneValue = 100;

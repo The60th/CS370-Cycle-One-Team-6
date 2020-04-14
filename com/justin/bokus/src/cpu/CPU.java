@@ -38,7 +38,6 @@ public class CPU {
         this.total_processes = this.memory.size();
         this.process_index = new int[this.total_processes];
 
-        this.cars = incoming_cars;
 
         for(int i = 0; i < this.total_processes; i++){
             process_index[i] = 0;
