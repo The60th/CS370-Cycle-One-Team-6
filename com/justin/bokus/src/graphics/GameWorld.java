@@ -6,7 +6,7 @@ import cpu.old.Car;
 import cpu.utils.Instruction;
 import framework.SimulationBody;
 import framework.SimulationFrame;
-import graphics.tracks.Track2;
+import org.dyn4j.collision.broadphase.Sap;
 import org.dyn4j.collision.narrowphase.Sat;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Geometry;
@@ -82,18 +82,27 @@ public class GameWorld extends SimulationFrame {
             param[1] = SimulationBody.class;
             param[2] = SimulationBody.class;
 
-            //Below copiles the track to make sure it is up to date then builds the track
+            //Below compiles the track to make sure it is up to date then builds the track
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
             StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
-            File javaFile = new File(System.getProperty("user.dir") + "/com/justin/bokus/src/graphics/tracks/" + fileName + ".java"); //finding the file to be compiled
-            Iterable<? extends JavaFileObject> compileLocation = fileManager.getJavaFileObjects(javaFile);  //loads the file to be compiled
-            Iterable<String> options = new ArrayList<>(Arrays.asList("-d", System.getProperty("user.dir") + "/target/classes/")); //location of the desired .class package
-            compiler.getTask(null, fileManager, null, options, null, compileLocation).call();   //compiling the file
-            File compiledFile = new File(System.getProperty("user.dir") + "/target/classes/");  //loading the compiled track file
-            ClassLoader loader = new URLClassLoader(new URL[]{compiledFile.toURI().toURL()});   //finding the track class
-            Class<?> f = loader.loadClass("graphics.tracks." + fileName);  //loading the track class
-            Method t = f.getMethod("buildWorld", param);    //loading the method that builds the track
-            t.invoke(t, world, car, car1);  //running the method and actually building the track
+            //finding the file to be compiled
+            File javaFile = new File(System.getProperty("user.dir") + "/com/justin/bokus/src/graphics/tracks/" + fileName + ".java");
+            //loads the file to be compiled
+            Iterable<? extends JavaFileObject> compileLocation = fileManager.getJavaFileObjects(javaFile);
+            //location of the desired .class package
+            Iterable<String> options = new ArrayList<>(Arrays.asList("-d", System.getProperty("user.dir") + "/target/classes/"));
+            //compiling the file
+            compiler.getTask(null, fileManager, null, options, null, compileLocation).call();
+            //loading the compiled track file
+            File compiledFile = new File(System.getProperty("user.dir") + "/target/classes/");
+            //finding the track class
+            ClassLoader loader = new URLClassLoader(new URL[]{compiledFile.toURI().toURL()});
+            //loading the track class
+            Class<?> f = loader.loadClass("graphics.tracks." + fileName);
+            //loading the method that builds the track
+            Method t = f.getMethod("buildWorld", param);
+            //running the method and actually building the track
+            t.invoke(t, world, car, car1);
             fileManager.close();
         }
         catch(java.lang.ClassNotFoundException e){
@@ -113,13 +122,12 @@ public class GameWorld extends SimulationFrame {
     @Override
     protected void initializeWorld(){
         this.world.setGravity(world.ZERO_GRAVITY);    //set the gravity to zero because it is top town
-        this.world.setNarrowphaseDetector(new Sat());      //enabing collision detection
 
         car = new SimulationBody(Color.red);
         car.addFixture(Geometry.createRectangle(25, 50));
         car.setMass(MassType.NORMAL);
         //translate located in world file that tells where the starting postion of the car is
-        world.addBody(car);
+        this.world.addBody(car);
 
         car1 = new SimulationBody(Color.blue);
         car1.addFixture(Geometry.createRectangle(25, 50));

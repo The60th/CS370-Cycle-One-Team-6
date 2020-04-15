@@ -2,4 +2,6 @@
 #Empty lines are supported. Whitespace within command lines is currently not fully supported.
 #Comments starting with # are supported.
 print Racing!
-jmp 1
+up true
+oneU true
+jmp 3
