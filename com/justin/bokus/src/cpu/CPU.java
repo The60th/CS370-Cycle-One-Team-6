@@ -62,12 +62,12 @@ public class CPU {
 
         int current_instruction = process_index[this.current_process];
         if(current_instruction >= this.memory.get(this.current_process).size()){
-            try {
+           // try {
                 endOfFile = true;
-                throw new CPUException("Exceeding memory length.");
-            } catch (CPUException e) {
-                e.printStackTrace();
-            }
+             //   throw new CPUException("Exceeding memory length.");
+           // } catch (CPUException e) {
+            //    e.printStackTrace();
+          //  }
         }
         if(endOfFile) return false;
         int x = subRun(this.memory.get(this.current_process).get(current_instruction));
