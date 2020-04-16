@@ -1,7 +1,6 @@
 package menu;
 
 import graphics.GameWorld;
-import graphics.Thrust;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,20 +9,17 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 public class Menu extends JFrame {
-    private int x = 300;
-    private int y = 200;
-    private int test = 100;
 
     private static File folder = new File("com/justin/bokus/res/images");
     private static File[] listOfFiles = folder.listFiles();
     private String[] listOfNames = new String[listOfFiles.length];
     private static int mapNum = 0;
 
-    JButton mapButton;
-    JButton prevButton;
-    JButton nextButton;
-    ImageIcon icon = new ImageIcon(String.valueOf(listOfFiles[mapNum]));
-    JFrame jf;
+    private JButton mapButton;
+    private JButton prevButton;
+    private JButton nextButton;
+    private ImageIcon icon = new ImageIcon(String.valueOf(listOfFiles[mapNum]));
+    private JFrame jf;
 
     private void BuildWindow() {
         for(int i = 0; i < listOfFiles.length; i++){
