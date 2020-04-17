@@ -10,7 +10,7 @@ import java.io.File;
 
 public class Menu extends JFrame {
 
-    private static File folder = new File("com/justin/bokus/res/images");
+    private static File folder = new File("com/justin/bokus/res/images/tracks");
     private static File[] listOfFiles = folder.listFiles();
     private String[] listOfNames = new String[listOfFiles.length];
     private static int mapNum = 0;
@@ -18,6 +18,7 @@ public class Menu extends JFrame {
     private JButton mapButton;
     private JButton prevButton;
     private JButton nextButton;
+    private JButton levelBuilderButton;
     private ImageIcon icon = new ImageIcon(String.valueOf(listOfFiles[mapNum]));
     private JFrame jf;
 
@@ -43,18 +44,23 @@ public class Menu extends JFrame {
         mapButton.addActionListener(mapListener);
 
         prevButton = new JButton("Previous");
-        prevButton.setBounds(100, 600, 100, 100);
+        prevButton.setBounds(100, 400, 100, 100);
         PreviousButtonListener previousListener = new PreviousButtonListener();
         prevButton.addActionListener(previousListener);
 
         nextButton = new JButton("Next");
-        nextButton.setBounds(1000, 600, 100, 100);
+        nextButton.setBounds(1000, 400, 100, 100);
         NextButtonListener nextListener = new NextButtonListener();
         nextButton.addActionListener(nextListener);
+
+        levelBuilderButton = new JButton("Level Builder");
+        levelBuilderButton.setBounds(500, 600, 200, 100);
+        levelBuilderButton.addActionListener(new LevelBuilderButtonListener());
 
         jf.add(mapButton);
         jf.add(prevButton);
         jf.add(nextButton);
+        jf.add(levelBuilderButton);
 
         jf.setVisible(true);
     }
@@ -101,6 +107,12 @@ public class Menu extends JFrame {
         }
     }
 
+    public class LevelBuilderButtonListener implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            jf.dispose();
+            LevelEditor.main(new String[]{});
+        }
+    }
     public static void main(String[] args) {
         Menu window = new Menu();
         window.BuildWindow();
