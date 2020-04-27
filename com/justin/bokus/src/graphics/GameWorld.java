@@ -2,12 +2,9 @@ package graphics;
 
 import cpu.CPU;
 import cpu.Parser;
-import cpu.old.Car;
 import cpu.utils.Instruction;
 import framework.SimulationBody;
 import framework.SimulationFrame;
-import org.dyn4j.collision.broadphase.Sap;
-import org.dyn4j.collision.narrowphase.Sat;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;

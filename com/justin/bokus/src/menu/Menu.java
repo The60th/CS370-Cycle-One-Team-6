@@ -10,10 +10,10 @@ import java.io.File;
 
 public class Menu extends JFrame {
 
-    private static File folder = new File("com/justin/bokus/res/images/tracks");
-    private static File[] listOfFiles = folder.listFiles();
+    private File folder = new File("com/justin/bokus/res/images/tracks");
+    private File[] listOfFiles = folder.listFiles();
     private String[] listOfNames = new String[listOfFiles.length];
-    private static int mapNum = 0;
+    private int mapNum = 0;
 
     private JButton mapButton;
     private JButton prevButton;
