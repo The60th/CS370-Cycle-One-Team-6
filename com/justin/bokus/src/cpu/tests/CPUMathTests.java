@@ -38,14 +38,20 @@ public class CPUMathTests {
         while (control) {
             control = cpu.runAsyncCycle();
         }
+
+        //Unit tests to compare resulting value to expected value.
         boolean result = cpu.registers[0] == registerZeroValue;
         System.out.println("RegisterZeroTest: " + result);
+
         result = cpu.registers[1] == registerOneValue;
         System.out.println("RegisterOneTest: " + result);
+
         result = cpu.registers[2] == registerTwoValue;
         System.out.println("RegisterTwoTest: " + result);
+
         result = cpu.registers[3] == registerThreeValue;
         System.out.println("RegisterThreeTest: " + result);
+
         result = cpu.registers[4] == registerFourValue;
         System.out.println("RegisterFourTest: " + result);
 
