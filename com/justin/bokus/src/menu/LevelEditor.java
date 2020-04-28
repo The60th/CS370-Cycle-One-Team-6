@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
+import static java.lang.Character.isDigit;
 
 public class LevelEditor extends JFrame {
 
@@ -57,6 +58,9 @@ public class LevelEditor extends JFrame {
         frame.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new CustomWindowListener());
         frame.setLayout(new FlowLayout());
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) { e.printStackTrace();}
 
         previewBtn.addActionListener(new previewListener());
         saveBtn.addActionListener(new saveListener());
@@ -201,6 +205,9 @@ public class LevelEditor extends JFrame {
                 if((TrackNameField.getText()).equalsIgnoreCase(listOfNames[i])){
                     JOptionPane.showMessageDialog(frame, "There is already a track named " + TrackNameField.getText());
                     return;
+                } else if(isDigit(TrackNameField.getText().charAt(0))){
+                    JOptionPane.showMessageDialog(frame, "Class names cant start with a number");
+                    return;
                 }
                 else {
                     JOptionPane.showMessageDialog(frame, "Track Saved!");
@@ -240,6 +247,8 @@ public class LevelEditor extends JFrame {
                 y = 400-40*(i/30);
                 if(buttonField[i].getIcon() != null){
                     getBodies(x, y, i, bodyPoints);
+                } if(buttonField[i].getBackground() == Color.green){
+                    getBodies(x,y, i, bodyPoints);
                 }
             }
             SortBodies(bodyPoints);
@@ -254,7 +263,7 @@ public class LevelEditor extends JFrame {
     //points are listed left then right when looking from green
     private Vector2[] getVectors(int x, int y, int pieceNum, int dir){
         Vector2[] points = new Vector2[2];
-        if(dir != 0){
+        if((dir != 0) && pieceNum == 24){
             switch(dir){
                 case 1:
                     points[0] = new Vector2(x+40, (y-40));
@@ -363,7 +372,8 @@ public class LevelEditor extends JFrame {
         int initI = i;
         int count = 0;
         int dir = 0;
-        Vector2[] piece0Points = getVectors(x, y, getPieceNum(i), dir);
+        int x0 = x;
+        int y0 = y;
         if(i+1 <= 599){
             if(buttonField[i + 1].getBackground() == Color.green) {
                 i++;
@@ -378,7 +388,7 @@ public class LevelEditor extends JFrame {
                         x = -600 + 40 * (i % 30);
                         y = 400 - 40 * (i / 30);
                         break;
-                    } else if(buttonField[i+1].getIcon() == null && buttonField[i+1].getBackground() == Color.white){
+                    } else if(buttonField[i + 1].getIcon() == null && buttonField[i+1].getBackground() == Color.white){
                         x = -600 + 40 * (i % 30);
                         y = 400 - 40 * (i / 30);
                         dir = 1;
@@ -460,8 +470,12 @@ public class LevelEditor extends JFrame {
                 }
             }
         }
-
         Vector2[] piece1Points = getVectors(x, y, getPieceNum(i), dir);
+        if(dir > 2)
+            dir = dir-2;
+        else if(dir <=2)
+            dir = dir+2;
+        Vector2[] piece0Points = getVectors(x0, y0, getPieceNum(i), dir);
         Vector2[] newBodyPoints = {piece0Points[0], piece0Points[1], piece1Points[0], piece1Points[1]};
 
         for(int n = 0; n < bodyPoints.size(); n++){
@@ -472,6 +486,8 @@ public class LevelEditor extends JFrame {
                 }
             }
         }
+
+
         if(count != 4)
             bodyPoints.add(newBodyPoints);
     }
@@ -545,9 +561,7 @@ public class LevelEditor extends JFrame {
             return 22;
         else if(i%30 == 29)
             return 23;
-        else if(buttonField[i].getIcon() == new ImageIcon(String.valueOf(listOfFiles[20])))
-            return 24;
-        return 9999;
+        return 24;
     }
 
     private void SortBodies(ArrayList<Vector2[]> bodyPoints){

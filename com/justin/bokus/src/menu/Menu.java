@@ -33,6 +33,9 @@ public class Menu extends JFrame {
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jf.setResizable(false);
         jf.setLayout(null);
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) { e.printStackTrace();}
 
         Image image = icon.getImage();
         Image scaledImage = image.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
