@@ -10,7 +10,7 @@ import java.io.File;
 
 public class Menu extends JFrame {
 
-    private File folder = new File(System.getProperty("user.dir") + "/com/justin/bokus/res/images/tracks");
+    private File folder = new File(System.getProperty("user.dir") + "/com/justin/bokus/resources/images/tracks");
     private File[] listOfFiles = folder.listFiles();
     private String[] listOfNames = new String[listOfFiles.length];
     private int mapNum = 0;

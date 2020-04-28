@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Parser {
-    public final String fileName = "com/justin/bokus/res/text/demo.txt";
+    public final String fileName = System.getProperty("user.dir") +  "/com/justin/bokus/resources/text/demo.txt";
     public final String fileName2 = "C:\\Users\\Justi\\Desktop\\Test_V2_3\\Test_V2\\src\\demo2.txt";
 
     public final static char LABEL_SYMBOL = '!';

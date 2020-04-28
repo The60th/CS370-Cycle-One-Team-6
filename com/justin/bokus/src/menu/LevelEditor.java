@@ -17,7 +17,7 @@ import static java.lang.Character.isDigit;
 
 public class LevelEditor extends JFrame {
 
-    private static File folder = new File("com/justin/bokus/res/images/icons");
+    private static File folder = new File(System.getProperty("user.dir") + "/com/justin/bokus/resources/images/icons");
     private static File[] listOfFiles = folder.listFiles();
     private ImageIcon[] pieceIcons = {
             new ImageIcon(String.valueOf(listOfFiles[0])),
@@ -196,7 +196,7 @@ public class LevelEditor extends JFrame {
         public void actionPerformed(ActionEvent e){
             int x;
             int y;
-            File folder = new File("com/justin/bokus/res/images/tracks");
+            File folder = new File(System.getProperty("user.dir") + "/com/justin/bokus/resources/images/tracks");
             File[] listOfFiles = folder.listFiles();
             String[] listOfNames = new String[listOfFiles.length];
             for(int i = 0; i < listOfFiles.length; i++)
@@ -226,7 +226,7 @@ public class LevelEditor extends JFrame {
             }
 
             try{
-                String fileName = System.getProperty("user.dir") + "/com/justin/bokus/res/images/tracks/" + name + ".PNG";
+                String fileName = System.getProperty("user.dir") + "/com/justin/bokus/resources/images/tracks/" + name + ".PNG";
                 BufferedImage buffImage = new BufferedImage(map.getWidth(), map.getHeight(), TYPE_INT_ARGB);
                 map.paint(buffImage.createGraphics());
                 File imageFile = new File(fileName);
