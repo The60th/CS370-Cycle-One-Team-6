@@ -226,7 +226,7 @@ public class LevelEditor extends JFrame {
             }
 
             try{
-                String fileName = "com/justin/bokus/res/images/tracks/" + name + ".PNG";
+                String fileName = System.getProperty("user.dir") + "com/justin/bokus/res/images/tracks/" + name + ".PNG";
                 BufferedImage buffImage = new BufferedImage(map.getWidth(), map.getHeight(), TYPE_INT_ARGB);
                 map.paint(buffImage.createGraphics());
                 File imageFile = new File(fileName);
