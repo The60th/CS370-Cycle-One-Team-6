@@ -17,8 +17,8 @@ import static java.lang.Character.isDigit;
 
 public class LevelEditor extends JFrame {
 
-    private static File folder = new File(System.getProperty("user.dir") + "/com/justin/bokus/resources/images/icons");
-    private static File[] listOfFiles = folder.listFiles();
+    private File folder = new File(Menu.rootDir + "com/justin/bokus/resources/images/icons");
+    private File[] listOfFiles = folder.listFiles();
     private ImageIcon[] pieceIcons = {
             new ImageIcon(String.valueOf(listOfFiles[0])),
             new ImageIcon(String.valueOf(listOfFiles[1])),
@@ -196,7 +196,7 @@ public class LevelEditor extends JFrame {
         public void actionPerformed(ActionEvent e){
             int x;
             int y;
-            File folder = new File(System.getProperty("user.dir") + "/com/justin/bokus/resources/images/tracks");
+            File folder = new File(Menu.rootDir + "com/justin/bokus/resources/images/tracks");
             File[] listOfFiles = folder.listFiles();
             String[] listOfNames = new String[listOfFiles.length];
             for(int i = 0; i < listOfFiles.length; i++)
@@ -226,7 +226,7 @@ public class LevelEditor extends JFrame {
             }
 
             try{
-                String fileName = System.getProperty("user.dir") + "/com/justin/bokus/resources/images/tracks/" + name + ".PNG";
+                String fileName = Menu.rootDir + "com/justin/bokus/resources/images/tracks/" + name + ".PNG";
                 BufferedImage buffImage = new BufferedImage(map.getWidth(), map.getHeight(), TYPE_INT_ARGB);
                 map.paint(buffImage.createGraphics());
                 File imageFile = new File(fileName);
@@ -607,7 +607,7 @@ public class LevelEditor extends JFrame {
     }
 
     private void writeTrack(String name, ArrayList<Vector2[]> bodyPoints) throws FileNotFoundException, UnsupportedEncodingException {
-        String fileName = System.getProperty("user.dir") + "/com/justin/bokus/src/graphics/tracks/";
+        String fileName = Menu.rootDir + "com/justin/bokus/src/graphics/tracks/";
         PrintWriter writer = new PrintWriter(fileName + name + ".java", "UTF-8");
         writer.println("package graphics.tracks;\n");
         writer.println("import org.dyn4j.dynamics.World;");

@@ -16,19 +16,34 @@ import javax.tools.ToolProvider;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
+import menu.Menu;
 
 @SuppressWarnings("Duplicates")
 public class GameWorld extends SimulationFrame {
+    /*private static String rootDir;{
+        try {
+            String fileName = new File(GameWorld.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
+            fileName = fileName.substring(0, fileName.length() - 39);
+            rootDir = new URLDecoder().decode(fileName, "UTF-8");
+            System.out.println(Menu.rootDir + " vs " + rootDir);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (java.net.URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
 
+     */
     public CPU cpu;
     private boolean firstRun = true;
-
     private SimulationBody car;
     private SimulationBody car1;
     private static String fileName;
@@ -40,7 +55,6 @@ public class GameWorld extends SimulationFrame {
     private static AtomicBoolean isRight1 = new AtomicBoolean(false);
     private static AtomicBoolean isForward1 = new AtomicBoolean(false);
     private static AtomicBoolean isReverse1 = new AtomicBoolean(false);
-
     public static void Left(boolean applyThrust){
         isLeft.set(applyThrust);
     }
@@ -65,13 +79,10 @@ public class GameWorld extends SimulationFrame {
     public static void Reverse1(boolean applyThrust){
         isReverse1.set(applyThrust);
     }
-
     public static void setFileName(String inFileName){fileName = inFileName;}
-
     private GameWorld(){
         super("GameWorld", 1);
     }
-
     private void LoadWorld(String fileName, World world, SimulationBody car, SimulationBody car1){
         try {
             Class[] param = new Class[3];
@@ -80,18 +91,18 @@ public class GameWorld extends SimulationFrame {
             param[2] = SimulationBody.class;
 
             //Below compiles the track to make sure it is up to date then builds the track
-            JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+            com.sun.tools.javac.api.JavacTool compiler = com.sun.tools.javac.api.JavacTool.create();
             StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
             //finding the file to be compiled
-            File javaFile = new File(System.getProperty("user.dir") + "/com/justin/bokus/src/graphics/tracks/" + fileName + ".java");
+            File javaFile = new File(Menu.rootDir + "com/justin/bokus/src/graphics/tracks/" + fileName + ".java");
             //loads the file to be compiled
             Iterable<? extends JavaFileObject> compileLocation = fileManager.getJavaFileObjects(javaFile);
             //location of the desired .class package
-            Iterable<String> options = new ArrayList<>(Arrays.asList("-d", System.getProperty("user.dir") + "/target/classes/"));
+            Iterable<String> options = new ArrayList<>(Arrays.asList("-d", Menu.rootDir + "/target/classes/"));
             //compiling the file
             compiler.getTask(null, fileManager, null, options, null, compileLocation).call();
             //loading the compiled track file
-            File compiledFile = new File(System.getProperty("user.dir") + "/target/classes/");
+            File compiledFile = new File(Menu.rootDir + "/target/classes/");
             //finding the track class
             ClassLoader loader = new URLClassLoader(new URL[]{compiledFile.toURI().toURL()});
             //loading the track class

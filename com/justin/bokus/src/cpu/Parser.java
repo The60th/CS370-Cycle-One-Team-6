@@ -5,18 +5,20 @@ import cpu.old.CPULoader;
 import cpu.utils.CpuCommands;
 import cpu.utils.Instruction;
 import cpu.utils.JumpLabel;
+import menu.Menu;
 
 import java.io.*;
 import java.lang.reflect.Array;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Parser {
-    public final String fileName = System.getProperty("user.dir") +  "/com/justin/bokus/resources/text/demo.txt";
-    public final String fileName2 = "C:\\Users\\Justi\\Desktop\\Test_V2_3\\Test_V2\\src\\demo2.txt";
+    private final String fileName = Menu.rootDir + "com/justin/bokus/resources/text/demo.txt";
+    private final String fileName2 = "C:\\Users\\Justi\\Desktop\\Test_V2_3\\Test_V2\\src\\demo2.txt";
 
-    public final static char LABEL_SYMBOL = '!';
-    public final static char COMMENT_SYMBOL = '#';
+    private final static char LABEL_SYMBOL = '!';
+    private final static char COMMENT_SYMBOL = '#';
     public int no_op_counter = 0;
 
     //Load a file into a "memory" arraylist to be ran later.

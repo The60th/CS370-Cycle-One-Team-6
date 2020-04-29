@@ -7,10 +7,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 public class Menu extends JFrame {
+    public static String rootDir;{
+        try{
+            String fileName = new File(Menu.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
+            //change 39 to 14 if you want to run outside the jar
+            fileName = fileName.substring(0, fileName.length()-39);
+            rootDir = new URLDecoder().decode(fileName, "UTF-8");
+            System.out.println(rootDir);
+        }catch(UnsupportedEncodingException e){e.printStackTrace();
+        }catch(java.net.URISyntaxException e){e.printStackTrace();}
 
-    private File folder = new File(System.getProperty("user.dir") + "/com/justin/bokus/resources/images/tracks");
+    }
+    private File folder = new File(rootDir + "com/justin/bokus/resources/images/tracks");
     private File[] listOfFiles = folder.listFiles();
     private String[] listOfNames = new String[listOfFiles.length];
     private int mapNum = 0;
@@ -63,6 +75,7 @@ public class Menu extends JFrame {
         jf.add(nextButton);
         jf.add(levelBuilderButton);
 
+        System.out.println(rootDir);
         jf.setVisible(true);
     }
 
