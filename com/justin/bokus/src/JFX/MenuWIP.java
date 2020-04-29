@@ -1,4 +1,4 @@
-package JFX;
+/*package JFX;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -13,4 +13,4 @@ public class MenuWIP extends Application {
     public void start(Stage primaryStage) {
 
     }
-}
+}*/

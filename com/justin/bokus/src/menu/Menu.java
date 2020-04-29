@@ -15,7 +15,7 @@ public class Menu extends JFrame {
         try{
             String fileName = new File(Menu.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
             //change 39 to 14 if you want to run outside the jar
-            fileName = fileName.substring(0, fileName.length()-39);
+            fileName = fileName.substring(0, fileName.length()-14);
             rootDir = new URLDecoder().decode(fileName, "UTF-8");
             System.out.println(rootDir);
         }catch(UnsupportedEncodingException e){e.printStackTrace();
@@ -95,7 +95,6 @@ public class Menu extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if (mapNum > 0) {
                 mapNum--;
-
                 icon = new ImageIcon(String.valueOf(listOfFiles[mapNum]));
                 Image image = icon.getImage();
                 Image scaledImage = image.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
