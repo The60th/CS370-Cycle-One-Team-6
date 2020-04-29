@@ -11,6 +11,17 @@ import java.net.URLDecoder;
 public class MainMenu extends JFrame{
     private JFrame jf;
     private JButton mapSelector;
+    public static String rootDir;{
+        try{
+            String fileName = new File(Menu.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
+            //change 39 to 14 if you want to run outside the jar
+            fileName = fileName.substring(0, fileName.length()-14);
+            rootDir = new URLDecoder().decode(fileName, "UTF-8");
+            System.out.println("test" + rootDir);
+        }catch(UnsupportedEncodingException e){e.printStackTrace();
+        }catch(java.net.URISyntaxException e){e.printStackTrace();}
+
+    }
 
     private void BuildWindow(){
         jf = new JFrame();
@@ -19,6 +30,7 @@ public class MainMenu extends JFrame{
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jf.setResizable(false);
         jf.setLayout(null);
+        System.out.println(rootDir);
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (Exception e) { e.printStackTrace();}

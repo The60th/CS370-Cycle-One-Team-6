@@ -5,16 +5,13 @@ import cpu.old.CPULoader;
 import cpu.utils.CpuCommands;
 import cpu.utils.Instruction;
 import cpu.utils.JumpLabel;
-import menu.Menu;
-
+import menu.MainMenu;
 import java.io.*;
-import java.lang.reflect.Array;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Parser {
-    private final String fileName = Menu.rootDir + "com/justin/bokus/resources/text/demo.txt";
+    private final String fileName = MainMenu.rootDir + "com/justin/bokus/resources/text/demo.txt";
     private final String fileName2 = "C:\\Users\\Justi\\Desktop\\Test_V2_3\\Test_V2\\src\\demo2.txt";
 
     private final static char LABEL_SYMBOL = '!';

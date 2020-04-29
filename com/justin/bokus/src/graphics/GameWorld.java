@@ -5,43 +5,25 @@ import cpu.Parser;
 import cpu.utils.Instruction;
 import framework.SimulationBody;
 import framework.SimulationFrame;
+import menu.MainMenu;
 import org.dyn4j.dynamics.World;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
-import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
-import javax.tools.ToolProvider;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
-import menu.Menu;
 
 @SuppressWarnings("Duplicates")
 public class GameWorld extends SimulationFrame {
-    /*private static String rootDir;{
-        try {
-            String fileName = new File(GameWorld.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
-            fileName = fileName.substring(0, fileName.length() - 39);
-            rootDir = new URLDecoder().decode(fileName, "UTF-8");
-            System.out.println(Menu.rootDir + " vs " + rootDir);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (java.net.URISyntaxException e) {
-            e.printStackTrace();
-        }
-    }
-
-     */
     public CPU cpu;
     private boolean firstRun = true;
     private SimulationBody car;
@@ -94,15 +76,15 @@ public class GameWorld extends SimulationFrame {
             com.sun.tools.javac.api.JavacTool compiler = com.sun.tools.javac.api.JavacTool.create();
             StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
             //finding the file to be compiled
-            File javaFile = new File(Menu.rootDir + "com/justin/bokus/src/graphics/tracks/" + fileName + ".java");
+            File javaFile = new File(MainMenu.rootDir + "com/justin/bokus/src/graphics/tracks/" + fileName + ".java");
             //loads the file to be compiled
             Iterable<? extends JavaFileObject> compileLocation = fileManager.getJavaFileObjects(javaFile);
             //location of the desired .class package
-            Iterable<String> options = new ArrayList<>(Arrays.asList("-d", Menu.rootDir + "/target/classes/"));
+            Iterable<String> options = new ArrayList<>(Arrays.asList("-d", MainMenu.rootDir + "/target/classes/"));
             //compiling the file
             compiler.getTask(null, fileManager, null, options, null, compileLocation).call();
             //loading the compiled track file
-            File compiledFile = new File(Menu.rootDir + "/target/classes/");
+            File compiledFile = new File(MainMenu.rootDir + "/target/classes/");
             //finding the track class
             ClassLoader loader = new URLClassLoader(new URL[]{compiledFile.toURI().toURL()});
             //loading the track class
