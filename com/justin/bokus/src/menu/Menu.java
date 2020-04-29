@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -28,7 +30,8 @@ public class Menu extends JFrame {
         jf = new JFrame();
         jf.setTitle("Sloppy Drivers: You Can't Drive!");
         jf.setSize(1200, 800);
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jf.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        jf.addWindowListener(new CustomWindowListener());
         jf.setResizable(false);
         jf.setLayout(null);
         try {
@@ -114,6 +117,26 @@ public class Menu extends JFrame {
             LevelEditor.main(new String[]{});
         }
     }
+
+    public class CustomWindowListener implements WindowListener {
+        public void windowOpened(WindowEvent e) {
+        }
+        public void windowClosing(WindowEvent e) {
+            jf.dispose();
+            MainMenu.main(new String[]{});
+        }
+        public void windowClosed(WindowEvent e) {
+        }
+        public void windowIconified(WindowEvent e) {
+        }
+        public void windowDeiconified(WindowEvent e) {
+        }
+        public void windowActivated(WindowEvent e) {
+        }
+        public void windowDeactivated(WindowEvent e) {
+        }
+    }
+
     public static void main(String[] args) {
         Menu window = new Menu();
         window.BuildWindow();

@@ -41,7 +41,7 @@ public class MainMenu extends JFrame{
         mapSelector.addActionListener(mapListener);
 
         JButton levelBuilderButton = new JButton("Level Builder");
-        levelBuilderButton.setBounds(500, 600, 200, 100);
+        levelBuilderButton.setBounds(400, 600, 400, 100);
         levelBuilderButton.addActionListener(new LevelBuilderButtonListener());
 
         jf.add(mapSelector);

@@ -640,7 +640,7 @@ public class LevelEditor extends JFrame {
         }
         public void windowClosing(WindowEvent e) {
             frame.dispose();
-            Menu.main(new String[]{});
+            MainMenu.main(new String[]{});
         }
         public void windowClosed(WindowEvent e) {
         }
