@@ -8,8 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 
 public class Menu extends JFrame {
     private File folder = new File(MainMenu.rootDir + "com/justin/bokus/resources/images/tracks");
@@ -66,7 +64,6 @@ public class Menu extends JFrame {
         jf.add(nextButton);
         jf.add(levelBuilderButton);
 
-        System.out.println(MainMenu.rootDir);
         jf.setVisible(true);
     }
 

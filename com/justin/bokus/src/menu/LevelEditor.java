@@ -205,24 +205,31 @@ public class LevelEditor extends JFrame {
                 if((TrackNameField.getText()).equalsIgnoreCase(listOfNames[i])){
                     JOptionPane.showMessageDialog(frame, "There is already a track named " + TrackNameField.getText());
                     return;
-                } else if(isDigit(TrackNameField.getText().charAt(0))){
+                }else if(isDigit(TrackNameField.getText().charAt(0))){
                     JOptionPane.showMessageDialog(frame, "Class names cant start with a number");
                     return;
-                }
-                else {
+                }else if(TrackNameField.getText().contains(" ")){
+                    JOptionPane.showMessageDialog(frame, "Class names cant contain a space");
+                    return;
+                }else{
                     JOptionPane.showMessageDialog(frame, "Track Saved!");
                     break;
                 }
             }
             String name = TrackNameField.getText();
 
-            ArrayList<Vector2[]> bodyPoints = new ArrayList<>();
+            ArrayList<BodyPoints> BodyPoints = new ArrayList<>();
+            BodyPoints.add(new BodyPoints(-1, 1000, new Vector2[0]));
 
             for(int i = 0; i < numButtons; i++){
                 if(buttonField[i].isBorderPainted())
                     buttonField[i].setBorderPainted(false);
                 else if(!buttonField[i].isBorderPainted())
                     buttonField[i].setBorderPainted(true);
+                if(buttonField[i].getBackground() == Color.green){
+                    if(buttonField[i].getIcon() == null)
+                        buttonField[i].setIcon(pieceIcons[20]);
+                }
             }
 
             try{
@@ -246,15 +253,13 @@ public class LevelEditor extends JFrame {
                 x = -600+40*(i%30);
                 y = 400-40*(i/30);
                 if(buttonField[i].getIcon() != null){
-                    getBodies(x, y, i, bodyPoints);
-                } if(buttonField[i].getBackground() == Color.green){
-                    getBodies(x,y, i, bodyPoints);
+                    getBodies(x, y, i, BodyPoints);
                 }
             }
-            SortBodies(bodyPoints);
-            try{writeTrack(name, bodyPoints);}
+            SortBodies(BodyPoints);
+            try{writeTrack(name, BodyPoints);}
             catch(Exception except){
-                System.out.print("an error has occured: ");
+                System.out.print("an error has occured on line " + except.getStackTrace()[0].getLineNumber() + ": ");
                 System.out.println(except);
             }
         }
@@ -263,7 +268,9 @@ public class LevelEditor extends JFrame {
     //points are listed left then right when looking from green
     private Vector2[] getVectors(int x, int y, int pieceNum, int dir){
         Vector2[] points = new Vector2[2];
-        if((dir != 0) && pieceNum == 24){
+        Vector2[] points0 = new Vector2[3];
+        Vector2[] points1 = new Vector2[4];
+        if((dir != 0) && pieceNum == 20){
             switch(dir){
                 case 1:
                     points[0] = new Vector2(x+40, (y-40));
@@ -281,6 +288,124 @@ public class LevelEditor extends JFrame {
                     points[0] = new Vector2(x, y);
                     points[1] = new Vector2((x+40), y);
                     return points;
+            }
+        }
+        if(dir == -1){
+            switch(pieceNum){
+                case 0:
+                    points0[0] = new Vector2((x+20), y);
+                    points0[1] = new Vector2(x, (y-40));
+                    points0[2] = new Vector2(x, y);
+                    return points0;
+                case 1:
+                    points1[0] = new Vector2((x+40), y);
+                    points1[1] = new Vector2((x+20), (y-40));
+                    points1[2] = new Vector2(x, y);
+                    points1[3] = new Vector2(x, (y-40));
+                    return points1;
+                case 2:
+                    points0[0] = new Vector2((x+40), y);
+                    points0[1] = new Vector2(x, (y-40));
+                    points0[2] = new Vector2(x, y);
+                    return points0;
+                case 3:
+                    points1[0] = new Vector2((x+40), (y-20));
+                    points1[1] = new Vector2((x+40), y);
+                    points1[2] = new Vector2(x, y);
+                    points1[3] = new Vector2(x, (y-40));
+                    return points1;
+                case 4:
+                    points0[0] = new Vector2((x+40), y);
+                    points0[1] = new Vector2(x, (y-20));
+                    points0[2] = new Vector2(x, y);
+                    return points0;
+                case 5:
+                    points0[0] = new Vector2((x+40), (y-20));
+                    points0[1] = new Vector2(x, y);
+                    points0[2] = new Vector2((x+40), y);
+                    return points0;
+                case 6:
+                    points1[0] = new Vector2((x+40), (y-40));
+                    points1[1] = new Vector2(x, (y-20));
+                    points1[2] = new Vector2((x+40), y);
+                    points1[3] = new Vector2(x, y);
+                    return points1;
+                case 7:
+                    points0[0] = new Vector2((x+40), (y-40));
+                    points0[1] = new Vector2(x, y);
+                    points0[2] = new Vector2((x+40), y);
+                    return points0;
+                case 8:
+                    points1[0] = new Vector2((x+20), (y-40));
+                    points1[1] = new Vector2(x, y);
+                    points1[2] = new Vector2((x+40), y);
+                    points1[3] = new Vector2((x+40), (y-40));
+                    return points1;
+                case 9:
+                    points0[0] = new Vector2((x+40), (y-40));
+                    points0[1] = new Vector2((x+20), y);
+                    points0[2] = new Vector2((x+40), y);
+                    return points0;
+                case 10:
+                    points0[0] = new Vector2((x+20), (y-40));
+                    points0[1] = new Vector2((x+40), y);
+                    points0[2] = new Vector2((x+40), (y-40));
+                    return points0;
+                case 11:
+                    points1[0] = new Vector2(x, (y-40));
+                    points1[1] = new Vector2((x+20), y);
+                    points1[2] = new Vector2((x+40), (y-40));
+                    points1[3] = new Vector2((x+40), y);
+                    return points1;
+                case 12:
+                    points0[0] = new Vector2(x, (y-40));
+                    points0[1] = new Vector2((x+40), y);
+                    points0[2] = new Vector2((x+40), (y-40));
+                    return points0;
+                case 13:
+                    points1[0] = new Vector2(x, (y-20));
+                    points1[1] = new Vector2(x, (y-40));
+                    points1[2] = new Vector2((x+40), (y-40));
+                    points1[3] = new Vector2((x+40), y);
+                    return points1;
+                case 14:
+                    points0[0] = new Vector2(x, (y-40));
+                    points0[1] = new Vector2((x+40), (y-20));
+                    points0[2] = new Vector2((x+40), (y-40));
+                    return points0;
+                case 15:
+                    points0[0] = new Vector2(x, (y-20));
+                    points0[1] = new Vector2((x+40), (y-40));
+                    points0[2] = new Vector2(x, (y-40));
+                    return points0;
+                case 16:
+                    points1[0] = new Vector2(x, y);
+                    points1[1] = new Vector2((x+40), (y-20));
+                    points1[2] = new Vector2(x, (y-40));
+                    points1[3] = new Vector2((x+40), (y-40));
+                    return points1;
+                case 17:
+                    points0[0] = new Vector2(x, y);
+                    points0[1] = new Vector2((x+40), (y-40));
+                    points0[2] = new Vector2(x, (y-40));
+                    return points0;
+                case 18:
+                    points1[0] = new Vector2((x+20), y);
+                    points1[1] = new Vector2((x+40), (y-40));
+                    points1[2] = new Vector2(x, (y-40));
+                    points1[3] = new Vector2(x, y);
+                    return points1;
+                case 19:
+                    points0[0] = new Vector2(x, y);
+                    points0[1] = new Vector2((x+20), (y-40));
+                    points0[2] = new Vector2(x, (y-40));
+                    return points0;
+                case 20:
+                    points1[0] = new Vector2(x, y);
+                    points1[1] = new Vector2(x+40, y);
+                    points1[2] = new Vector2(x, y-40);
+                    points1[3] = new Vector2(x+40, y-40);
+                    return points1;
             }
         }
         switch(pieceNum){
@@ -364,225 +489,100 @@ public class LevelEditor extends JFrame {
                 points[0] = new Vector2(x, y);
                 points[1] = new Vector2((x+20), (y-40));
                 return points;
+            case 20:
+                return points;
         }
         return points;
     }
 
-    private void getBodies(int x, int y, int i, ArrayList<Vector2[]> bodyPoints){
+    private void getBodies(int x, int y, int i, ArrayList<BodyPoints> BodyPoints){
         int initI = i;
-        int count = 0;
-        int dir = 0;
-        int x0 = x;
-        int y0 = y;
-        if(i+1 <= 599){
-            if(buttonField[i + 1].getBackground() == Color.green) {
-                i++;
-                while (buttonField[i].getBackground() == Color.green) {
-                    if(i%30 == 29){
-                        x = -600 + 40 * (i % 30);
-                        y = 400 - 40 * (i / 30);
-                        dir = 1;
-                        break;
-                    } else if (buttonField[i + 1].getIcon() != null) {
-                        i++;
-                        x = -600 + 40 * (i % 30);
-                        y = 400 - 40 * (i / 30);
-                        break;
-                    } else if(buttonField[i + 1].getIcon() == null && buttonField[i+1].getBackground() == Color.white){
-                        x = -600 + 40 * (i % 30);
-                        y = 400 - 40 * (i / 30);
-                        dir = 1;
-                        break;
-                    }
-                    i++;
-                }
-            }
-        }
-        if(i-1 >= 0){
-            if ((buttonField[i - 1].getBackground() == Color.green) && (initI == i)){
-                i--;
-                while(buttonField[i].getBackground() == Color.green){
-                    if(i%30 == 0) {
-                        x = -600 + 40 * (i % 30);
-                        y = 400 - 40 * (i / 30);
-                        dir = 3;
-                        break;
-                    } if(buttonField[i-1].getIcon() != null){
-                        i--;
-                        x = -600+40*(i%30);
-                        y = 400-40*(i/30);
-                        break;
-                    } else if(buttonField[i-1].getIcon() == null && buttonField[i-1].getBackground() == Color.white){
-                        x = -600 + 40 * (i % 30);
-                        y = 400 - 40 * (i / 30);
-                        dir = 3;
-                        break;
-                    }
-                    i--;
-                }
-            }
-        }
-        if(i+30 <= 569){
-            if ((buttonField[i + 30].getBackground() == Color.green) && (initI == i)) {
-                i += 30;
-                while (buttonField[i].getBackground() == Color.green) {
-                    if (i/30 == 19) {
-                        x = -600 + 40 * (i % 30);
-                        y = 400 - 40 * (i / 30);
-                        dir = 2;
-                        break;
-                    } else if (buttonField[i + 30].getIcon() != null) {
-                        i += 30;
-                        x = -600 + 40 * (i % 30);
-                        y = 400 - 40 * (i / 30);
-                        break;
-                    } else if(buttonField[i+30].getIcon() == null && buttonField[i+30].getBackground() == Color.white){
-                        x = -600 + 40 * (i % 30);
-                        y = 400 - 40 * (i / 30);
-                        dir = 2;
-                        break;
-                    }
-                    i += 30;
-                }
-            }
-        }
-        if(i-30 >= 0) {
-            if ((buttonField[i - 30].getBackground() == Color.green) && (initI == i)) {
-                i -= 30;
-                while (buttonField[i].getBackground() == Color.green) {
-                    if (i/30 == 0) {
-                        x = -600 + 40 * (i % 30);
-                        y = 400 - 40 * (i / 30);
-                        dir = 4;
-                        break;
-                    } else if (buttonField[i - 30].getIcon() != null) {
-                        i -= 30;
-                        x = -600 + 40 * (i % 30);
-                        y = 400 - 40 * (i / 30);
-                        break;
-                    } else if((buttonField[i-30].getIcon() == null) && (buttonField[i-30].getBackground() == Color.WHITE)){
-                        x = -600 + 40 * (i % 30);
-                        y = 400 - 40 * (i / 30);
-                        dir = 4;
-                        break;
-                    }
-                    i -= 30;
-                }
-            }
-        }
-        Vector2[] piece1Points = getVectors(x, y, getPieceNum(i), dir);
-        if(dir > 2)
-            dir = dir-2;
-        else if(dir <=2)
-            dir = dir+2;
-        Vector2[] piece0Points = getVectors(x0, y0, getPieceNum(i), dir);
-        Vector2[] newBodyPoints = {piece0Points[0], piece0Points[1], piece1Points[0], piece1Points[1]};
-
-        for(int n = 0; n < bodyPoints.size(); n++){
-            for(int q = 0; q < bodyPoints.get(n).length; q++){
-                for(int w = 0; w < newBodyPoints.length; w++){
-                    if(bodyPoints.get(n)[q].equals(newBodyPoints[w]))
-                        count++;
-                }
-            }
-        }
-
-
-        if(count != 4)
-            bodyPoints.add(newBodyPoints);
+        Vector2[] piecePoints = getVectors(x, y, getPieceNum(i), -1);
+        System.out.println("added body: ");
+        if(BodyPoints.get(0).i0 == -1){
+            BodyPoints.remove(0);
+            BodyPoints.add(new BodyPoints(initI, i, piecePoints));
+        } else
+            BodyPoints.add(new BodyPoints(initI, i, piecePoints));
     }
 
     private int getPieceNum(int i){
         if(buttonField[i].getIcon() == pieceIcons[0]){
             return 0;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[1]){
+        }else if(buttonField[i].getIcon() == pieceIcons[1]){
             return 1;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[2]){
+        }else if(buttonField[i].getIcon() == pieceIcons[2]){
             return 2;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[3]){
+        }else if(buttonField[i].getIcon() == pieceIcons[3]){
             return 3;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[4]){
+        }else if(buttonField[i].getIcon() == pieceIcons[4]){
             return 4;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[5]){
+        }else if(buttonField[i].getIcon() == pieceIcons[5]){
             return 5;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[6]){
+        }else if(buttonField[i].getIcon() == pieceIcons[6]){
             return 6;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[7]){
+        }else if(buttonField[i].getIcon() == pieceIcons[7]){
             return 7;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[8]){
+        }else if(buttonField[i].getIcon() == pieceIcons[8]){
             return 8;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[9]){
+        }else if(buttonField[i].getIcon() == pieceIcons[9]){
             return 9;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[10]){
+        }else if(buttonField[i].getIcon() == pieceIcons[10]){
             return 10;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[11]){
+        }else if(buttonField[i].getIcon() == pieceIcons[11]){
             return 11;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[12]){
+        }else if(buttonField[i].getIcon() == pieceIcons[12]){
             return 12;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[13]){
+        }else if(buttonField[i].getIcon() == pieceIcons[13]){
             return 13;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[14]){
+        }else if(buttonField[i].getIcon() == pieceIcons[14]){
             return 14;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[15]){
+        }else if(buttonField[i].getIcon() == pieceIcons[15]){
             return 15;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[16]){
+        }else if(buttonField[i].getIcon() == pieceIcons[16]){
             return 16;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[17]){
+        }else if(buttonField[i].getIcon() == pieceIcons[17]){
             return 17;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[18]){
+        }else if(buttonField[i].getIcon() == pieceIcons[18]){
             return 18;
-        }
-        else if(buttonField[i].getIcon() == pieceIcons[19]){
+        }else if(buttonField[i].getIcon() == pieceIcons[19]){
             return 19;
-        }
-        else if(i/30 == 0)
+        }else if(buttonField[i].getIcon() == pieceIcons[20]){
             return 20;
-        else if(i/30 == 19)
-            return 21;
-        else if(i%30 == 0)
+        /*}else if(i/30 == 0){
+            //return 21;
+        }else if(i/30 == 19){
             return 22;
-        else if(i%30 == 29)
+        }else if(i%30 == 0){
             return 23;
-        return 24;
+        }else if(i%30 == 29){
+            return 24;
+
+         */
+        }
+
+        return -99;
     }
 
-    private void SortBodies(ArrayList<Vector2[]> bodyPoints){
+    private void SortBodies(ArrayList<BodyPoints> BodyPoints){
         double xCent;
         double yCent;
         AngleIndex temp;
         ArrayList<Vector2[]> tempList = new ArrayList<>();
-        for(int i = 0; i < bodyPoints.size(); i++){
+        for(int i = 0; i < BodyPoints.size(); i++){
             xCent = 0;
             yCent = 0;
-            AngleIndex[] angleList = new AngleIndex[bodyPoints.get(i).length];
-            Vector2[] temp2 = new Vector2[bodyPoints.get(i).length];
-            for(int n = 0; n < bodyPoints.get(i).length; n++){
-                xCent += bodyPoints.get(i)[n].x;
-                yCent += bodyPoints.get(i)[n].y;
+            AngleIndex[] angleList = new AngleIndex[BodyPoints.get(i).bodyPoints.length];
+            Vector2[] temp2 = new Vector2[BodyPoints.get(i).bodyPoints.length];
+            for(int n = 0; n < BodyPoints.get(i).bodyPoints.length; n++){
+                xCent += BodyPoints.get(i).bodyPoints[n].x;
+                yCent += BodyPoints.get(i).bodyPoints[n].y;
             }
-            xCent = xCent/bodyPoints.get(i).length;
-            yCent = yCent/bodyPoints.get(i).length;
+            xCent = xCent/BodyPoints.get(i).bodyPoints.length;
+            yCent = yCent/BodyPoints.get(i).bodyPoints.length;
             //populating angle list
             for(int n = 0; n < angleList.length; n++)
-                angleList[n] = new AngleIndex(new Vector2(bodyPoints.get(i)[n], new Vector2(xCent, yCent)).getAngleBetween(new Vector2(new Vector2(xCent, yCent), new Vector2(xCent, yCent + 100))), n);
+                angleList[n] = new AngleIndex(new Vector2(BodyPoints.get(i).bodyPoints[n], new Vector2(xCent, yCent)).getAngleBetween(new Vector2(new Vector2(xCent, yCent), new Vector2(xCent, yCent + 100))), n);
             //sorting angle list
             for(int n = 0; n < angleList.length; n++){
                 for(int q = 0; q < angleList.length; q++){
@@ -596,9 +596,9 @@ public class LevelEditor extends JFrame {
 
             //ordering the vectors based off of angle list
             for(int n = 0; n < angleList.length; n++)
-                temp2[n] = bodyPoints.get(i)[angleList[n].index];
+                temp2[n] = BodyPoints.get(i).bodyPoints[angleList[n].index];
 
-            bodyPoints.set(i, temp2);
+            BodyPoints.get(i).bodyPoints = temp2;
             //allowing these to be taken care of in garbage collection
             temp = null;
             angleList = null;
@@ -606,7 +606,7 @@ public class LevelEditor extends JFrame {
         }
     }
 
-    private void writeTrack(String name, ArrayList<Vector2[]> bodyPoints) throws FileNotFoundException, UnsupportedEncodingException {
+    private void writeTrack(String name, ArrayList<BodyPoints> BodyPoints) throws FileNotFoundException, UnsupportedEncodingException {
         String fileName = MainMenu.rootDir + "com/justin/bokus/src/graphics/tracks/";
         PrintWriter writer = new PrintWriter(fileName + name + ".java", "UTF-8");
         writer.println("package graphics.tracks;\n");
@@ -618,15 +618,20 @@ public class LevelEditor extends JFrame {
         writer.println("import org.dyn4j.geometry.Vector2;\n\n");
         writer.println("public class " + name + " {");
         writer.println("    public static void buildWorld(World world, SimulationBody car, SimulationBody car1){");
-        for(int i = 0; i < bodyPoints.size(); i++){
+        for(int i = 0; i < BodyPoints.size(); i++){
             writer.println("        SimulationBody body" + i + " = new SimulationBody(Color.green);");
             writer.println("        body" + i + ".setMass(MassType.INFINITE);");
-            writer.println("        body" + i + ".addFixture(Geometry.createPolygon(\n                ");
-            for(int n = 0; n < bodyPoints.get(i).length-1; n++){
-                writer.print("new Vector2" + bodyPoints.get(i)[n] + ", ");
+            writer.println("        body" + i + ".addFixture(Geometry.createPolygon(");
+            for (int n = 0; n < BodyPoints.get(i).bodyPoints.length; n++) {
+                if(n == BodyPoints.get(i).bodyPoints.length-1){
+                    writer.println("new Vector2" + BodyPoints.get(i).bodyPoints[n] + "));");
+                    writer.println("        world.addBody(body" + i + ");\n");
+                    break;
+                }
+                if (n == 0)
+                    writer.print("        ");
+                writer.print("new Vector2" + BodyPoints.get(i).bodyPoints[n] + ", ");
             }
-            writer.println("new Vector2" + bodyPoints.get(i)[bodyPoints.get(i).length-1] + "));");
-            writer.println("world.addBody(body" + i + ");\n");
         }
         writer.println("        car.translate(-200, 0);");
         writer.println("        car1.translate(+200, 0);");
@@ -686,6 +691,19 @@ public class LevelEditor extends JFrame {
             else
                 return A;
         }
+    }
+
+    private class BodyPoints{
+        private int i0;
+        private int i1;
+        private Vector2[] bodyPoints;
+
+        private BodyPoints(int inI0, int inI1, Vector2[] inBodyPoints){
+            i0 = inI0;
+            i1 = inI1;
+            bodyPoints = inBodyPoints;
+        }
+        private BodyPoints(){}
     }
 
     public static void main(String[] args){

@@ -1,7 +1,6 @@
 package menu;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -17,7 +16,6 @@ public class MainMenu extends JFrame{
             //change 39 to 14 if you want to run outside the jar
             fileName = fileName.substring(0, fileName.length()-14);
             rootDir = new URLDecoder().decode(fileName, "UTF-8");
-            System.out.println("test" + rootDir);
         }catch(UnsupportedEncodingException e){e.printStackTrace();
         }catch(java.net.URISyntaxException e){e.printStackTrace();}
 
@@ -30,7 +28,6 @@ public class MainMenu extends JFrame{
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jf.setResizable(false);
         jf.setLayout(null);
-        System.out.println(rootDir);
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (Exception e) { e.printStackTrace();}
