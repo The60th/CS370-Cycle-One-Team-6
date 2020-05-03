@@ -1,0 +1,17 @@
+oneU true
+up true
+no_op 100
+up false
+no_op 50
+oneU false
+oneR true
+right true
+no_op 1
+oneR false
+right false
+oneU true
+up true
+no_op 100
+up false
+oneU false
+jmp 17

@@ -14,7 +14,7 @@ public class MainMenu extends JFrame{
         try{
             String fileName = new File(Menu.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
             //change 39 to 14 if you want to run outside the jar
-            fileName = fileName.substring(0, fileName.length()-14);
+            fileName = fileName.substring(0, fileName.length()-39);
             rootDir = new URLDecoder().decode(fileName, "UTF-8");
         }catch(UnsupportedEncodingException e){e.printStackTrace();
         }catch(java.net.URISyntaxException e){e.printStackTrace();}
