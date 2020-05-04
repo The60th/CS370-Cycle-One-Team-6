@@ -498,7 +498,6 @@ public class LevelEditor extends JFrame {
     private void getBodies(int x, int y, int i, ArrayList<BodyPoints> BodyPoints){
         int initI = i;
         Vector2[] piecePoints = getVectors(x, y, getPieceNum(i), -1);
-        System.out.println("added body: ");
         if(BodyPoints.get(0).i0 == -1){
             BodyPoints.remove(0);
             BodyPoints.add(new BodyPoints(initI, i, piecePoints));
