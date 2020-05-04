@@ -41,7 +41,7 @@ public class MainMenu extends JFrame{
         } catch (Exception e) { e.printStackTrace();}
 
         mapSelector = new JButton("Select a map");
-        mapSelector.setBounds(400, 400, 400, 100);
+        mapSelector.setBounds(400, 375, 400, 100);
         try {
             mapSelector.setIcon(new ImageIcon(ImageIO.read(new File(rootDir + "com/justin/bokus/resources/images/backgrounds/MapSelect.png"))));
         } catch (IOException e) {
@@ -51,7 +51,7 @@ public class MainMenu extends JFrame{
         mapSelector.addActionListener(mapListener);
 
         JButton levelBuilderButton = new JButton("Level Builder");
-        levelBuilderButton.setBounds(400, 600, 400, 100);
+        levelBuilderButton.setBounds(400, 525, 400, 100);
         try {
             levelBuilderButton.setIcon(new ImageIcon(ImageIO.read(new File(rootDir + "com/justin/bokus/resources/images/backgrounds/LevelBuilderSelect.png"))));
         } catch (IOException e) {
