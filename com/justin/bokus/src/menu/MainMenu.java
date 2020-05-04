@@ -42,16 +42,27 @@ public class MainMenu extends JFrame{
 
         mapSelector = new JButton("Select a map");
         mapSelector.setBounds(400, 400, 400, 100);
+        try {
+            mapSelector.setIcon(new ImageIcon(ImageIO.read(new File(rootDir + "com/justin/bokus/resources/images/backgrounds/MapSelect.png"))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         MapSelectorListener mapListener = new MapSelectorListener();
         mapSelector.addActionListener(mapListener);
 
         JButton levelBuilderButton = new JButton("Level Builder");
         levelBuilderButton.setBounds(400, 600, 400, 100);
+        try {
+            levelBuilderButton.setIcon(new ImageIcon(ImageIO.read(new File(rootDir + "com/justin/bokus/resources/images/backgrounds/LevelBuilderSelect.png"))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         levelBuilderButton.addActionListener(new LevelBuilderButtonListener());
 
         jf.add(mapSelector);
         jf.add(levelBuilderButton);
         jf.setVisible(true);
+        System.out.println(levelBuilderButton.getSize());
     }
 
     public class MapSelectorListener implements ActionListener {
