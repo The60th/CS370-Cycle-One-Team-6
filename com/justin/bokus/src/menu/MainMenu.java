@@ -1,9 +1,11 @@
 package menu;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -14,7 +16,7 @@ public class MainMenu extends JFrame{
         try{
             String fileName = new File(Menu.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
             //change 39 to 14 if you want to run outside the jar
-            fileName = fileName.substring(0, fileName.length()-39);
+            fileName = fileName.substring(0, fileName.length()-14);
             rootDir = new URLDecoder().decode(fileName, "UTF-8");
         }catch(UnsupportedEncodingException e){e.printStackTrace();
         }catch(java.net.URISyntaxException e){e.printStackTrace();}
@@ -26,6 +28,12 @@ public class MainMenu extends JFrame{
         jf.setTitle("Sloppy Drivers: You Can't Drive!");
         jf.setSize(1200, 800);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //System.out.println(rootDir/com/justin/bokus/resources/images/backgrounds/MainMenu.png);
+        try {
+            jf.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File(rootDir + "com/justin/bokus/resources/images/backgrounds/MainMenu.png")))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         jf.setResizable(false);
         jf.setLayout(null);
         try {

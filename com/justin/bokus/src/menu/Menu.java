@@ -55,14 +55,9 @@ public class Menu extends JFrame {
         NextButtonListener nextListener = new NextButtonListener();
         nextButton.addActionListener(nextListener);
 
-        JButton levelBuilderButton = new JButton("Level Builder");
-        levelBuilderButton.setBounds(500, 600, 200, 100);
-        levelBuilderButton.addActionListener(new LevelBuilderButtonListener());
-
         jf.add(mapButton);
         jf.add(prevButton);
         jf.add(nextButton);
-        jf.add(levelBuilderButton);
 
         jf.setVisible(true);
     }
@@ -105,13 +100,6 @@ public class Menu extends JFrame {
 
                 mapButton.setIcon(icon);
             }
-        }
-    }
-
-    public class LevelBuilderButtonListener implements ActionListener{
-        public void actionPerformed(ActionEvent e){
-            jf.dispose();
-            LevelEditor.main(new String[]{});
         }
     }
 
